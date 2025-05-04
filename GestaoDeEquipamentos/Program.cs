@@ -6,13 +6,26 @@ namespace GestaoDeEquipamentos
     {
         static void Main(string[] args)
         {
+            Product product = new Product();
             List<Product> products = new List<Product>();
 
             while (true)
             {
                 ProductHeader();
-                Product product = ProductCreateInput();
-                product.Create(product, products);
+                string option = ProductMenu();
+
+                switch (int.Parse(option))
+                {
+                    case 1:
+                        product = ProductCreateInput();
+                        product.Create(product, products);
+                        break;
+                    case 2:
+                        ProductReadOutput(products);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -24,9 +37,24 @@ namespace GestaoDeEquipamentos
             Console.WriteLine("---------------------------");
         }
 
+        static string ProductMenu()
+        {
+            Console.WriteLine("PRODUTOS\n");
+            Console.WriteLine("Selecione uma opção...");
+            Console.WriteLine("1- Cadastrar");
+            Console.WriteLine("2- Visualizar");
+            Console.WriteLine("3- Editar");
+            Console.WriteLine("4- Excluir\n");
+
+            return Console.ReadLine();
+        }
+
         static Product ProductCreateInput()
         {
+            Console.Clear();
+
             Product product = new Product();
+
             Console.Write("ID: ");
             product.id = int.Parse(Console.ReadLine());
             Console.Write("Nome: ");
@@ -41,6 +69,25 @@ namespace GestaoDeEquipamentos
             product.manufactoringDate = Convert.ToDateTime(Console.ReadLine());
 
             return product;
+        }
+
+        static void ProductReadOutput(List<Product> products)
+        {
+            Console.Clear();
+
+            foreach (Product product in products)
+            {
+                string[] productData = product.Read(product);
+
+                for (int i = 0; i < productData.Length; i++)
+                {
+                    Console.WriteLine(productData[i]);
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
         }
     }
 }

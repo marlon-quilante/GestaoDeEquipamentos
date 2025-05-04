@@ -13,5 +13,20 @@
         {
             products.Add(product);
         }
+
+        public string[] Read(Product product)
+        {
+            string[] productData =
+            [
+                $"ID: {product.id}",
+                $"Nome: {product.name}",
+                $"Preço: {product.price}",
+                $"Número de série: {product.serialNumber}",
+                $"Fabricante: {product.manufactorName}",
+                $"Data de fabricação: {product.manufactoringDate.ToString("dd/MM/yyyy")}",
+            ];
+
+            return productData;
+        }
     }
 }
