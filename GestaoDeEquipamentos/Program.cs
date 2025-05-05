@@ -9,8 +9,9 @@ namespace GestaoDeEquipamentos
             Product product = new Product();
             List<Product> productsList = new List<Product>();
             int id = 0;
+            bool online = true;
 
-            while (true)
+            while (online == true)
             {
                 ProductHeader();
                 string option = ProductMenu();
@@ -19,20 +20,27 @@ namespace GestaoDeEquipamentos
                 {
                     case 1:
                         product = new Product();
+                        CreateProductHeader();
                         product = ProductDataInput(product);
                         product.Create(product, productsList);
                         break;
                     case 2:
+                        ReadProductHeader();
                         ProductReadOutput(productsList);
                         break;
                     case 3:
+                        UpdateProductHeader();
                         id = GetProductID(productsList);
                         product = product.Update(productsList, id);
                         Product updatedProduct = ProductDataInput(product);
                         break;
                     case 4:
+                        DeleteProductHeader();
                         id = GetProductID(productsList);
                         product.Delete(productsList, id);
+                        break;
+                    case 5:
+                        online = false;
                         break;
                     default:
                         break;
@@ -48,6 +56,38 @@ namespace GestaoDeEquipamentos
             Console.WriteLine("---------------------------");
         }
 
+        static void CreateProductHeader()
+        {
+            Console.Clear();
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("Cadastro de Produto");
+            Console.WriteLine("---------------------------\n");
+        }
+
+        static void ReadProductHeader()
+        {
+            Console.Clear();
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("Produtos Cadastrados");
+            Console.WriteLine("---------------------------\n");
+        }
+
+        static void UpdateProductHeader()
+        {
+            Console.Clear();
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("Atualização de Produto");
+            Console.WriteLine("---------------------------\n");
+        }
+
+        static void DeleteProductHeader()
+        {
+            Console.Clear();
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("Exclusão de Produto");
+            Console.WriteLine("---------------------------\n");
+        }
+
         static string ProductMenu()
         {
             Console.WriteLine("PRODUTOS\n");
@@ -55,15 +95,14 @@ namespace GestaoDeEquipamentos
             Console.WriteLine("1- Cadastrar");
             Console.WriteLine("2- Visualizar");
             Console.WriteLine("3- Editar");
-            Console.WriteLine("4- Excluir\n");
+            Console.WriteLine("4- Excluir");
+            Console.WriteLine("5- Sair\n");
 
             return Console.ReadLine();
         }
 
         static Product ProductDataInput(Product product)
         {
-            Console.Clear();
-
             Console.Write("ID: ");
             product.id = int.Parse(Console.ReadLine());
             Console.Write("Nome: ");
@@ -82,16 +121,16 @@ namespace GestaoDeEquipamentos
 
         static void ProductReadOutput(List<Product> productsList)
         {
-            Console.Clear();
-
             foreach (Product product in productsList)
             {
                 string[] productData = product.Read(product);
 
+                Console.WriteLine("-------------------------------------");
                 for (int i = 0; i < productData.Length; i++)
                 {
                     Console.WriteLine(productData[i]);
                 }
+                Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
             }
 
@@ -106,7 +145,6 @@ namespace GestaoDeEquipamentos
 
             while (validID == false)
             {
-                Console.Clear();
                 Console.Write("Digite o ID do produto: ");
                 id = int.Parse(Console.ReadLine());
 
@@ -125,6 +163,7 @@ namespace GestaoDeEquipamentos
                     Console.ReadLine();
                 }
             }
+            Console.WriteLine();
             return id;
         }
     }
