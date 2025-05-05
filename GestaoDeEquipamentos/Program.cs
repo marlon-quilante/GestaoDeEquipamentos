@@ -7,7 +7,7 @@ namespace GestaoDeEquipamentos
         static void Main(string[] args)
         {
             Product product = new Product();
-            List<Product> products = new List<Product>();
+            List<Product> productsList = new List<Product>();
 
             while (true)
             {
@@ -17,11 +17,17 @@ namespace GestaoDeEquipamentos
                 switch (int.Parse(option))
                 {
                     case 1:
-                        product = ProductCreateInput();
-                        product.Create(product, products);
+                        product = new Product();
+                        product = ProductDataInput(product);
+                        product.Create(product, productsList);
                         break;
                     case 2:
-                        ProductReadOutput(products);
+                        ProductReadOutput(productsList);
+                        break;
+                    case 3:
+                        int id = GetProductID(productsList);
+                        product = product.Update(productsList, id);
+                        Product updatedProduct = ProductDataInput(product);
                         break;
                     default:
                         break;
@@ -49,11 +55,9 @@ namespace GestaoDeEquipamentos
             return Console.ReadLine();
         }
 
-        static Product ProductCreateInput()
+        static Product ProductDataInput(Product product)
         {
             Console.Clear();
-
-            Product product = new Product();
 
             Console.Write("ID: ");
             product.id = int.Parse(Console.ReadLine());
@@ -71,11 +75,11 @@ namespace GestaoDeEquipamentos
             return product;
         }
 
-        static void ProductReadOutput(List<Product> products)
+        static void ProductReadOutput(List<Product> productsList)
         {
             Console.Clear();
 
-            foreach (Product product in products)
+            foreach (Product product in productsList)
             {
                 string[] productData = product.Read(product);
 
@@ -88,6 +92,35 @@ namespace GestaoDeEquipamentos
 
             Console.WriteLine("Pressione ENTER para continuar...");
             Console.ReadLine();
+        }
+
+        static int GetProductID(List<Product> productsList)
+        {
+            int id = 0;
+            bool validID = false;
+
+            while (validID == false)
+            {
+                Console.Clear();
+                Console.Write("Digite o ID do produto para edição: ");
+                id = int.Parse(Console.ReadLine());
+
+                foreach (Product product in productsList)
+                {
+                    if (id == product.id)
+                    {
+                        validID = true;
+                        break;
+                    } 
+                }
+
+                if (validID == false)
+                {
+                    Console.WriteLine("\nNão foi encontrado um produto com este ID! Pressione ENTER e tente novamente...");
+                    Console.ReadLine();
+                }
+            }
+            return id;
         }
     }
 }

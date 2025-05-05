@@ -9,9 +9,9 @@
         public string manufactorName = "";
         public DateTime manufactoringDate = new DateTime();
 
-        public void Create(Product product, List<Product> products)
+        public void Create(Product product, List<Product> productsList)
         {
-            products.Add(product);
+            productsList.Add(product);
         }
 
         public string[] Read(Product product)
@@ -27,6 +27,16 @@
             ];
 
             return productData;
+        }
+
+        public Product Update(List<Product> productsList, int id)
+        {
+            foreach (Product product in productsList)
+            {
+                if (id == product.id)
+                    return product;
+            }
+            return null;
         }
     }
 }
