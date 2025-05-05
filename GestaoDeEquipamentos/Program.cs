@@ -8,6 +8,7 @@ namespace GestaoDeEquipamentos
         {
             Product product = new Product();
             List<Product> productsList = new List<Product>();
+            int id = 0;
 
             while (true)
             {
@@ -25,9 +26,13 @@ namespace GestaoDeEquipamentos
                         ProductReadOutput(productsList);
                         break;
                     case 3:
-                        int id = GetProductID(productsList);
+                        id = GetProductID(productsList);
                         product = product.Update(productsList, id);
                         Product updatedProduct = ProductDataInput(product);
+                        break;
+                    case 4:
+                        id = GetProductID(productsList);
+                        product.Delete(productsList, id);
                         break;
                     default:
                         break;
@@ -46,7 +51,7 @@ namespace GestaoDeEquipamentos
         static string ProductMenu()
         {
             Console.WriteLine("PRODUTOS\n");
-            Console.WriteLine("Selecione uma opção...");
+            Console.WriteLine("Selecione uma opção...\n");
             Console.WriteLine("1- Cadastrar");
             Console.WriteLine("2- Visualizar");
             Console.WriteLine("3- Editar");
@@ -102,7 +107,7 @@ namespace GestaoDeEquipamentos
             while (validID == false)
             {
                 Console.Clear();
-                Console.Write("Digite o ID do produto para edição: ");
+                Console.Write("Digite o ID do produto: ");
                 id = int.Parse(Console.ReadLine());
 
                 foreach (Product product in productsList)

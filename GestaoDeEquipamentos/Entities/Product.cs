@@ -38,5 +38,17 @@
             }
             return null;
         }
+
+        public void Delete(List<Product> productsList, int id)
+        {
+            foreach (Product product in productsList)
+            {
+                if (id == product.id)
+                {
+                    productsList.Remove(product);
+                    break;
+                }
+            }
+        }
     }
 }
