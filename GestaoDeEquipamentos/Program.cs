@@ -8,7 +8,7 @@ namespace GestaoDeEquipamentos
         {
             Product product = new Product();
             List<Product> productsList = new List<Product>();
-            int id = 0;
+            int updateID = 0;
             bool online = true;
 
             while (online == true)
@@ -21,7 +21,7 @@ namespace GestaoDeEquipamentos
                     case 1:
                         product = new Product();
                         CreateProductHeader();
-                        product = ProductDataInput(product, productsList);
+                        product = ProductCreateInput(product, productsList);
                         product.Create(product, productsList);
                         break;
                     case 2:
@@ -30,14 +30,14 @@ namespace GestaoDeEquipamentos
                         break;
                     case 3:
                         UpdateProductHeader();
-                        id = GetProductID(productsList);
-                        product = product.Update(productsList, id);
-                        Product updatedProduct = ProductDataInput(product, productsList);
+                        updateID = GetProductID(productsList);
+                        product = product.Update(productsList, updateID);
+                        Product updatedProduct = ProductUpdateInput(product, productsList, updateID);
                         break;
                     case 4:
                         DeleteProductHeader();
-                        id = GetProductID(productsList);
-                        product.Delete(productsList, id);
+                        updateID = GetProductID(productsList);
+                        product.Delete(productsList, updateID);
                         break;
                     case 5:
                         online = false;
@@ -101,7 +101,7 @@ namespace GestaoDeEquipamentos
             return Console.ReadLine();
         }
 
-        static Product ProductDataInput(Product product, List<Product> productsList)
+        static Product ProductCreateInput(Product product, List<Product> productsList)
         {
             bool validID = true;
 
@@ -110,17 +110,50 @@ namespace GestaoDeEquipamentos
                 Console.Write("ID: ");
                 product.id = int.Parse(Console.ReadLine());
 
-                foreach (Product p in productsList)
+                if (product.IDExists(product.id, productsList))
                 {
-                    if (product.id == p.id)
-                    {
-                        Console.WriteLine("\nJá existe um produto cadastrado com este ID! Pressione ENTER e tente novamente...");
-                        Console.ReadLine();
-                        validID = false;
-                        break;
-                    }
-                    else
-                        validID = true;
+                    Console.WriteLine("\nJá existe um produto cadastrado com este ID! Pressione ENTER e tente novamente...");
+                    Console.ReadLine();
+                    validID = false;
+                }
+                else
+                    validID = true;
+            }
+            while (validID == false);
+
+            Console.Write("Nome: ");
+            product.name = Console.ReadLine();
+            Console.Write("Preço: ");
+            product.price = decimal.Parse(Console.ReadLine());
+            Console.Write("Número de série: ");
+            product.serialNumber = int.Parse(Console.ReadLine());
+            Console.Write("Nome do fabricante: ");
+            product.manufactorName = Console.ReadLine();
+            Console.Write("Data de fabricação: ");
+            product.manufactoringDate = Convert.ToDateTime(Console.ReadLine());
+
+            return product;
+        }
+
+        static Product ProductUpdateInput(Product product, List<Product> productsList, int updateID)
+        {
+            bool validID = true;
+
+            do
+            {
+                Console.Write("ID: ");
+                int id = int.Parse(Console.ReadLine());
+
+                if (product.IDExists(id, productsList) && id != updateID)
+                {
+                    Console.WriteLine("\nJá existe um produto cadastrado com este ID! Pressione ENTER e tente novamente...");
+                    Console.ReadLine();
+                    validID = false;
+                }
+                else
+                {
+                    validID = true;
+                    product.id = id;
                 }
             }
             while (validID == false);
@@ -174,7 +207,7 @@ namespace GestaoDeEquipamentos
                     {
                         validID = true;
                         break;
-                    } 
+                    }
                 }
 
                 if (validID == false)

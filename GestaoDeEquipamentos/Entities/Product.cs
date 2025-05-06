@@ -50,5 +50,23 @@
                 }
             }
         }
+
+        public bool IDExists(int id, List<Product> productsList)
+        {
+            bool idExists = false;
+
+            foreach (Product p in productsList)
+            {
+                if (id == p.id)
+                {
+                    idExists = true;
+                    break;
+                }
+                else
+                    idExists = false;
+            }
+
+            return idExists;
+        }
     }
 }
