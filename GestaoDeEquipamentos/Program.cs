@@ -21,7 +21,7 @@ namespace GestaoDeEquipamentos
                     case 1:
                         product = new Product();
                         CreateProductHeader();
-                        product = ProductDataInput(product);
+                        product = ProductDataInput(product, productsList);
                         product.Create(product, productsList);
                         break;
                     case 2:
@@ -32,7 +32,7 @@ namespace GestaoDeEquipamentos
                         UpdateProductHeader();
                         id = GetProductID(productsList);
                         product = product.Update(productsList, id);
-                        Product updatedProduct = ProductDataInput(product);
+                        Product updatedProduct = ProductDataInput(product, productsList);
                         break;
                     case 4:
                         DeleteProductHeader();
@@ -101,10 +101,30 @@ namespace GestaoDeEquipamentos
             return Console.ReadLine();
         }
 
-        static Product ProductDataInput(Product product)
+        static Product ProductDataInput(Product product, List<Product> productsList)
         {
-            Console.Write("ID: ");
-            product.id = int.Parse(Console.ReadLine());
+            bool validID = true;
+
+            do
+            {
+                Console.Write("ID: ");
+                product.id = int.Parse(Console.ReadLine());
+
+                foreach (Product p in productsList)
+                {
+                    if (product.id == p.id)
+                    {
+                        Console.WriteLine("\nJá existe um produto cadastrado com este ID! Pressione ENTER e tente novamente...");
+                        Console.ReadLine();
+                        validID = false;
+                        break;
+                    }
+                    else
+                        validID = true;
+                }
+            }
+            while (validID == false);
+
             Console.Write("Nome: ");
             product.name = Console.ReadLine();
             Console.Write("Preço: ");
