@@ -28,7 +28,7 @@ namespace GestaoDeEquipamentos.Controller
                 $"Nome: {product.name}",
                 $"Preço: {product.price}",
                 $"Número de série: {product.serialNumber}",
-                $"Fabricante: {product.manufactorName}",
+                $"Fabricante: {product.manufactor.name}",
                 $"Data de fabricação: {product.manufactoringDate.ToString("dd/MM/yyyy")}",
             ];
 

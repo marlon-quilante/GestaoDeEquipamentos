@@ -5,7 +5,6 @@ namespace GestaoDeEquipamentos.View
 {
     public class TicketView
     {
-        public Ticket ticket;
         public List<Ticket> ticketsList;
         public TicketController ticketController;
         public ProductController productController;
@@ -53,7 +52,6 @@ namespace GestaoDeEquipamentos.View
 
         public string Menu()
         {
-            Console.WriteLine("CHAMADOS\n");
             Console.WriteLine("Selecione uma opção...\n");
             Console.WriteLine("1- Cadastrar");
             Console.WriteLine("2- Visualizar");

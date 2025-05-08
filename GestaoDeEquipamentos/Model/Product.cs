@@ -6,7 +6,7 @@
         public string name;
         public decimal price;
         public int serialNumber;
-        public string manufactorName;
+        public Manufactor manufactor;
         public DateTime manufactoringDate;
     }
 }

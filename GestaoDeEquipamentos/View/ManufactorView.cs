@@ -1,20 +1,21 @@
-﻿using GestaoDeEquipamentos.Model;
-using GestaoDeEquipamentos.Controller;
+﻿using GestaoDeEquipamentos.Controller;
+using GestaoDeEquipamentos.Model;
 
 namespace GestaoDeEquipamentos.View
 {
-    public class ProductView
+    public class ManufactorView
     {
-        public List<Product> productsList;
-        public ProductController productController;
-        public ManufactorView manufactorView;
+        public Manufactor manufactor;
+        public List<Manufactor> manufactorsList;
         public ManufactorController manufactorController;
+        public ProductController productController;
+        public ProductView productView;
 
         public void MainHeader()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine("Controle de Equipamentos");
+            Console.WriteLine("Controle de Fabricantes");
             Console.WriteLine("---------------------------");
         }
 
@@ -22,7 +23,7 @@ namespace GestaoDeEquipamentos.View
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine("Cadastro de Equipamento");
+            Console.WriteLine("Cadastro de Fabricante");
             Console.WriteLine("---------------------------\n");
         }
 
@@ -30,7 +31,7 @@ namespace GestaoDeEquipamentos.View
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine("Equipamentos Cadastrados");
+            Console.WriteLine("Fabricantes Cadastrados");
             Console.WriteLine("---------------------------\n");
         }
 
@@ -38,7 +39,7 @@ namespace GestaoDeEquipamentos.View
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine("Edição de Equipamento");
+            Console.WriteLine("Edição de Fabricante");
             Console.WriteLine("---------------------------\n");
         }
 
@@ -46,7 +47,7 @@ namespace GestaoDeEquipamentos.View
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine("Exclusão de Equipamento");
+            Console.WriteLine("Exclusão de Fabricante");
             Console.WriteLine("---------------------------\n");
         }
 
@@ -62,36 +63,30 @@ namespace GestaoDeEquipamentos.View
             return Console.ReadLine();
         }
 
-        public Product Inputs(Product product)
+        public Manufactor Inputs(Manufactor manufactor)
         {
             Console.Write("Nome: ");
-            product.name = Console.ReadLine();
-            Console.Write("Preço: ");
-            product.price = decimal.Parse(Console.ReadLine());
-            Console.Write("Número de série: ");
-            product.serialNumber = int.Parse(Console.ReadLine());
+            manufactor.name = Console.ReadLine();
+            Console.Write("Email: ");
+            manufactor.email = Console.ReadLine();
+            Console.Write("Telefone: ");
+            manufactor.phone = Console.ReadLine();
 
-            int idManufactor = manufactorView.GetID();
-            Manufactor manufactor = manufactorController.GetManufactorByID(idManufactor);
-            product.manufactor = manufactor;
-
-            Console.Write("Data de fabricação: ");
-            product.manufactoringDate = Convert.ToDateTime(Console.ReadLine());
-
-            return product;
+            return manufactor;
         }
 
         public void ShowList()
         {
             ReadHeader();
-            foreach (Product p in productsList)
+
+            foreach (Manufactor m in manufactorsList)
             {
-                string[] productData = productController.Read(p);
+                string[] manufactorData = manufactorController.Read(m);
 
                 Console.WriteLine("-------------------------------------");
-                for (int i = 0; i < productData.Length; i++)
+                for (int i = 0; i < manufactorData.Length; i++)
                 {
-                    Console.WriteLine(productData[i]);
+                    Console.WriteLine(manufactorData[i]);
                 }
                 Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
@@ -108,13 +103,13 @@ namespace GestaoDeEquipamentos.View
 
             do
             {
-                Console.Write("ID do produto: ");
+                Console.Write("ID do fabricante: ");
                 inputID = int.Parse(Console.ReadLine());
-                IDExists = productController.IDExists(inputID);
+                IDExists = manufactorController.IDExists(inputID);
 
                 if (IDExists == false)
                 {
-                    Console.WriteLine("\nNão foi encontrado um produto com este ID! Pressione ENTER e tente novamente...");
+                    Console.WriteLine("\nNão foi encontrado um fabricante com este ID! Pressione ENTER e tente novamente...");
                     Console.ReadLine();
                 }
             }
