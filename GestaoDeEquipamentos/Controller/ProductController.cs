@@ -20,19 +20,9 @@ namespace GestaoDeEquipamentos.Controller
             productsList.Add(product);
         }
 
-        public string[] Read(Product product)
+        public void Read()
         {
-            string[] productData =
-            [
-                $"ID: {product.id}",
-                $"Nome: {product.name}",
-                $"Preço: {product.price}",
-                $"Número de série: {product.serialNumber}",
-                $"Fabricante: {product.manufactor.name}",
-                $"Data de fabricação: {product.manufactoringDate.ToString("dd/MM/yyyy")}",
-            ];
-
-            return productData;
+            productView.ShowList();
         }
 
         public void Update()

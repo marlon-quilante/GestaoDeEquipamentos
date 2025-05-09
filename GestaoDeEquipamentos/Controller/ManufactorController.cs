@@ -23,18 +23,9 @@ namespace GestaoDeEquipamentos.Controller
             manufactorsList.Add(manufactor);
         }
 
-        public string[] Read(Manufactor manufactor)
+        public void Read()
         {
-            string[] manufactorData =
-            [
-                $"ID: {manufactor.id}",
-                $"Nome: {manufactor.name}",
-                $"Email: {manufactor.email}",
-                $"Telefone: {manufactor.phone}",
-                $"Qtd de equipamentos: {GetProductsQty(manufactor)}"
-            ];
-
-            return manufactorData;
+            manufactorView.ShowList();
         }
 
         public void Update()

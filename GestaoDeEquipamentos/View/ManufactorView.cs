@@ -79,20 +79,16 @@ namespace GestaoDeEquipamentos.View
         {
             ReadHeader();
 
+            Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -10} | {4, -5}",
+                "ID", "Nome", "Email", "Telefone", "Qtd de Produtos");
+
             foreach (Manufactor m in manufactorsList)
             {
-                string[] manufactorData = manufactorController.Read(m);
 
-                Console.WriteLine("-------------------------------------");
-                for (int i = 0; i < manufactorData.Length; i++)
-                {
-                    Console.WriteLine(manufactorData[i]);
-                }
-                Console.WriteLine("-------------------------------------");
-                Console.WriteLine();
+                Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -10} | {4, -5}",
+                    m.id, m.name, m.email, m.phone, manufactorController.GetProductsQty(m));
             }
-
-            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
         }
 

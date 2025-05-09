@@ -23,18 +23,9 @@ namespace GestaoDeEquipamentos.Controller
             ticketsList.Add(ticket);
         }
 
-        public string[] Read(Ticket ticket)
+        public void Read()
         {
-            string[] ticketData =
-            [
-                $"ID: {ticket.id}",
-                $"Título: {ticket.title}",
-                $"Descrição: {ticket.description}",
-                $"Produto: {ticket.product.name}",
-                $"Data de Abertura: {ticket.openingDate.ToString("dd/MM/yyyy")}"
-            ];
-
-            return ticketData;
+            ticketView.ShowList();
         }
 
         public void Update()

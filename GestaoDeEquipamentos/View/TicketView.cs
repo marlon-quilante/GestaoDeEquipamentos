@@ -78,20 +78,17 @@ namespace GestaoDeEquipamentos.View
         public void ShowList()
         {
             ReadHeader();
+
+            Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
+                "ID", "Título", "Descrição", "Equipamento", "Data de Abertura");
+
             foreach (Ticket t in ticketsList)
             {
-                string[] ticketData = ticketController.Read(t);
 
-                Console.WriteLine("-------------------------------------");
-                for (int i = 0; i < ticketData.Length; i++)
-                {
-                    Console.WriteLine(ticketData[i]);
-                }
-                Console.WriteLine("-------------------------------------");
-                Console.WriteLine();
+                Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
+                    t.id, t.title, t.description, t.product.name, t.openingDate.ToShortDateString());
             }
-
-            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
         }
 

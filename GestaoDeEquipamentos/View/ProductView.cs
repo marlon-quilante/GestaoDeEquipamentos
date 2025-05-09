@@ -84,20 +84,17 @@ namespace GestaoDeEquipamentos.View
         public void ShowList()
         {
             ReadHeader();
+
+            Console.WriteLine("{0, -5} | {1, -20} | {2, -10} | {3, -20} | {4, -20} | {5, -20}",
+                "ID", "Nome", "Preço", "Número de Série", "Fabricante", "Data de Fabricação");
+
             foreach (Product p in productsList)
             {
-                string[] productData = productController.Read(p);
 
-                Console.WriteLine("-------------------------------------");
-                for (int i = 0; i < productData.Length; i++)
-                {
-                    Console.WriteLine(productData[i]);
-                }
-                Console.WriteLine("-------------------------------------");
-                Console.WriteLine();
+                Console.WriteLine("{0, -5} | {1, -20} | {2, -10} | {3, -20} | {4, -20} | {5, -20}",
+                    p.id, p.name, p.price, p.serialNumber, p.manufactor.name, p.manufactoringDate.ToShortDateString());
             }
-
-            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
         }
 

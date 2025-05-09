@@ -100,7 +100,7 @@ namespace GestaoDeEquipamentos
                     productController.Create();
                     break;
                 case 2:
-                    productView.ShowList();
+                    productController.Read();
                     break;
                 case 3:
                     productController.Update();
@@ -126,7 +126,7 @@ namespace GestaoDeEquipamentos
                     ticketController.Create();
                     break;
                 case 2:
-                    ticketView.ShowList();
+                    ticketController.Read();
                     break;
                 case 3:
                     ticketController.Update();
@@ -152,7 +152,7 @@ namespace GestaoDeEquipamentos
                     manufactorController.Create();
                     break;
                 case 2:
-                    manufactorView.ShowList();
+                    manufactorController.Read();
                     break;
                 case 3:
                     manufactorController.Update();
