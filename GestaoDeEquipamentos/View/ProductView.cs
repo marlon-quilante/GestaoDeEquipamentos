@@ -5,10 +5,14 @@ namespace GestaoDeEquipamentos.View
 {
     public class ProductView
     {
-        public List<Product> productsList;
-        public ProductController productController;
+        private ProductController productController;
         public ManufactorView manufactorView;
         public ManufactorController manufactorController;
+
+        public ProductView(ProductController productController)
+        {
+            this.productController = productController;
+        }
 
         public void MainHeader()
         {
@@ -18,36 +22,49 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("---------------------------");
         }
 
-        public void CreateHeader()
+        public void Create()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Cadastro de Equipamento");
             Console.WriteLine("---------------------------\n");
+
+            Product newProduct = Inputs();
+            productController.CreateController(newProduct);
         }
 
-        public void ReadHeader()
+        public void Read()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Equipamentos Cadastrados");
             Console.WriteLine("---------------------------\n");
+
+            ShowList();
         }
 
-        public void UpdateHeader()
+        public void Update()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Edição de Equipamento");
             Console.WriteLine("---------------------------\n");
+
+            int idToUpdate = GetID();
+            Console.WriteLine();
+            Product product = Inputs();
+            productController.UpdateController(product, idToUpdate);
         }
 
-        public void DeleteHeader()
+        public void Delete()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Exclusão de Equipamento");
             Console.WriteLine("---------------------------\n");
+
+            int idToDelete = GetID();
+            productController.DeleteController(idToDelete);
         }
 
         public string Menu()
@@ -62,33 +79,32 @@ namespace GestaoDeEquipamentos.View
             return Console.ReadLine();
         }
 
-        public Product Inputs(Product product)
+        private Product Inputs()
         {
             Console.Write("Nome: ");
-            product.name = Console.ReadLine();
+            string name = Console.ReadLine();
             Console.Write("Preço: ");
-            product.price = decimal.Parse(Console.ReadLine());
+            decimal price = decimal.Parse(Console.ReadLine());
             Console.Write("Número de série: ");
-            product.serialNumber = int.Parse(Console.ReadLine());
+            int serialNumber = int.Parse(Console.ReadLine());
 
             int idManufactor = manufactorView.GetID();
             Manufactor manufactor = manufactorController.GetManufactorByID(idManufactor);
-            product.manufactor = manufactor;
 
             Console.Write("Data de fabricação: ");
-            product.manufactoringDate = Convert.ToDateTime(Console.ReadLine());
+            DateTime manufacturingDate = Convert.ToDateTime(Console.ReadLine());
+
+            Product product = new Product(name, price, serialNumber, manufactor, manufacturingDate);
 
             return product;
         }
 
-        public void ShowList()
+        private void ShowList()
         {
-            ReadHeader();
-
             Console.WriteLine("{0, -5} | {1, -20} | {2, -10} | {3, -20} | {4, -20} | {5, -20}",
                 "ID", "Nome", "Preço", "Número de Série", "Fabricante", "Data de Fabricação");
 
-            foreach (Product p in productsList)
+            foreach (Product p in productController.productsList)
             {
 
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -10} | {3, -20} | {4, -20} | {5, -20}",

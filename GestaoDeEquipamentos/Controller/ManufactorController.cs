@@ -1,53 +1,36 @@
 ﻿using GestaoDeEquipamentos.Model;
-using GestaoDeEquipamentos.View;
 
 namespace GestaoDeEquipamentos.Controller
 {
     public class ManufactorController
     {
-        public Manufactor manufactor;
-        public List<Manufactor> manufactorsList;
-        public ManufactorView manufactorView;
-        public Product product;
-        public List<Product> productsList;
-        public ProductView productView;
-        public int idCount = 0;
+        public List<Manufactor> manufactorsList = new List<Manufactor>();
+        public ProductController productController;
+        private int idCount = 0;
 
-        public void Create()
+        public void CreateController(Manufactor newManufactor)
         {
-            manufactorView.CreateHeader();
-            manufactor = new Manufactor();
             idCount++;
-            manufactor.id = idCount;
-            manufactor = manufactorView.Inputs(manufactor);
-            manufactorsList.Add(manufactor);
+            newManufactor.id = idCount;
+            manufactorsList.Add(newManufactor);
         }
 
-        public void Read()
+        public void UpdateController(Manufactor updatedManufactor, int idToUpdate)
         {
-            manufactorView.ShowList();
-        }
-
-        public void Update()
-        {
-            manufactorView.UpdateHeader();
-            int idToUpdate = manufactorView.GetID();
-
             foreach (Manufactor m in manufactorsList)
             {
                 if (idToUpdate == m.id)
                 {
-                    manufactorView.Inputs(m);
+                    m.name = updatedManufactor.name;
+                    m.email = updatedManufactor.email;
+                    m.phone = updatedManufactor.phone;
                     break;
                 }
             }
         }
 
-        public void Delete()
+        public void DeleteController(int idToDelete)
         {
-            manufactorView.DeleteHeader();
-            int idToDelete = manufactorView.GetID();
-
             foreach (Manufactor m in manufactorsList)
             {
                 if (idToDelete == m.id)
@@ -91,7 +74,7 @@ namespace GestaoDeEquipamentos.Controller
         {
             int number = 0;
 
-            foreach (Product p in productsList)
+            foreach (Product p in productController.productsList)
             {
                 if (manufactor.id == p.manufactor.id)
                     number++;

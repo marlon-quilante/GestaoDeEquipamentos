@@ -5,11 +5,12 @@ namespace GestaoDeEquipamentos.View
 {
     public class ManufactorView
     {
-        public Manufactor manufactor;
-        public List<Manufactor> manufactorsList;
-        public ManufactorController manufactorController;
-        public ProductController productController;
-        public ProductView productView;
+        private ManufactorController manufactorController;
+
+        public ManufactorView(ManufactorController manufactorController)
+        {
+            this.manufactorController = manufactorController;
+        }
 
         public void MainHeader()
         {
@@ -19,36 +20,50 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("---------------------------");
         }
 
-        public void CreateHeader()
+        public void Create()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Cadastro de Fabricante");
             Console.WriteLine("---------------------------\n");
+
+            Manufactor newManufactor = Inputs();
+            manufactorController.CreateController(newManufactor);
         }
 
-        public void ReadHeader()
+        public void Read()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Fabricantes Cadastrados");
             Console.WriteLine("---------------------------\n");
+
+            ShowList();
         }
 
-        public void UpdateHeader()
+        public void Update()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Edição de Fabricante");
             Console.WriteLine("---------------------------\n");
+
+            int idToUpdate = GetID();
+            Console.WriteLine();
+            Manufactor newManufactor = Inputs();
+            manufactorController.UpdateController(newManufactor, idToUpdate);
         }
 
-        public void DeleteHeader()
+        public void Delete()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Exclusão de Fabricante");
             Console.WriteLine("---------------------------\n");
+
+            int idToDelete = GetID();
+
+            manufactorController.DeleteController(idToDelete);
         }
 
         public string Menu()
@@ -63,26 +78,26 @@ namespace GestaoDeEquipamentos.View
             return Console.ReadLine();
         }
 
-        public Manufactor Inputs(Manufactor manufactor)
+        public Manufactor Inputs()
         {
             Console.Write("Nome: ");
-            manufactor.name = Console.ReadLine();
+            string name = Console.ReadLine();
             Console.Write("Email: ");
-            manufactor.email = Console.ReadLine();
+            string email = Console.ReadLine();
             Console.Write("Telefone: ");
-            manufactor.phone = Console.ReadLine();
+            string phone = Console.ReadLine();
+
+            Manufactor manufactor = new Manufactor(name, email, phone);
 
             return manufactor;
         }
 
-        public void ShowList()
+        private void ShowList()
         {
-            ReadHeader();
-
             Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -10} | {4, -5}",
                 "ID", "Nome", "Email", "Telefone", "Qtd de Produtos");
 
-            foreach (Manufactor m in manufactorsList)
+            foreach (Manufactor m in manufactorController.manufactorsList)
             {
 
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -10} | {4, -5}",

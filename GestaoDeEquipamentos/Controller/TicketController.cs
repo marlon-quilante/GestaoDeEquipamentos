@@ -1,53 +1,36 @@
 ﻿using GestaoDeEquipamentos.Model;
-using GestaoDeEquipamentos.View;
 
 namespace GestaoDeEquipamentos.Controller
 {
     public class TicketController
     {
-        public Ticket ticket;
-        public List<Ticket> ticketsList;
-        public TicketView ticketView;
-        public Product product;
-        public ProductView productView;
-        public int idCount = 0;
+        public List<Ticket> ticketsList = new List<Ticket>();
+        private int idCount = 0;
 
-        public void Create()
+        public void CreateController(Ticket newTicket)
         {
-            ticketView.CreateHeader();
-            ticket = new Ticket();
             idCount++;
-            ticket.id = idCount;
-            ticket.openingDate = DateTime.Now;
-            ticket = ticketView.Inputs(ticket);
-            ticketsList.Add(ticket);
+            newTicket.id = idCount;
+            newTicket.openingDate = DateTime.Now;
+            ticketsList.Add(newTicket);
         }
 
-        public void Read()
+        public void UpdateController(Ticket updatedTicket, int idToUpdate)
         {
-            ticketView.ShowList();
-        }
-
-        public void Update()
-        {
-            ticketView.UpdateHeader();
-            int idToUpdate = ticketView.GetID();
-
             foreach (Ticket t in ticketsList)
             {
                 if (idToUpdate == t.id)
                 {
-                    ticketView.Inputs(t);
+                    t.title = updatedTicket.title;
+                    t.description = updatedTicket.description;
+                    t.product = updatedTicket.product;
                     break;
                 }       
             }
         }
 
-        public void Delete()
+        public void DeleteController(int idToDelete)
         {
-            ticketView.DeleteHeader();
-            int idToDelete = ticketView.GetID();
-
             foreach (Ticket t in ticketsList)
             {
                 if (idToDelete == t.id)

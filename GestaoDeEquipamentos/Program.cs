@@ -8,40 +8,22 @@ namespace GestaoDeEquipamentos
     {
         static void Main(string[] args)
         {
-            Manufactor manufactor = new Manufactor();
-            ManufactorController manufactorController = new ManufactorController();
-            ManufactorView manufactorView = new ManufactorView();
-            List<Manufactor> manufactorsList = new List<Manufactor>();
-
-            Product product = new Product();
             ProductController productController = new ProductController();
-            ProductView productView = new ProductView();
-            List<Product> productsList = new List<Product>();
+            ProductView productView = new ProductView(productController);
 
-            Ticket ticket = new Ticket();
+            ManufactorController manufactorController = new ManufactorController();
+            ManufactorView manufactorView = new ManufactorView(manufactorController);
+
             TicketController ticketController = new TicketController();
-            TicketView ticketView = new TicketView();
-            List<Ticket> ticketsList = new List<Ticket>();
+            TicketView ticketView = new TicketView(ticketController);
 
-            manufactorView.manufactorController = manufactorController;
-            manufactorView.manufactorsList = manufactorsList;
-            manufactorController.manufactorView = manufactorView;
-            manufactorController.manufactorsList = manufactorsList;
-            manufactorController.productsList = productsList;
+            manufactorController.productController = productController;
 
-            productView.productController = productController;
-            productView.productsList = productsList;
-            productView.manufactorView = manufactorView;
             productView.manufactorController = manufactorController;
-            productController.productView = productView;
-            productController.productsList = productsList;
+            productView.manufactorView = manufactorView;
 
-            ticketView.ticketController = ticketController;
-            ticketView.ticketsList = ticketsList;
-            ticketView.productView = productView;
             ticketView.productController = productController;
-            ticketController.ticketView = ticketView;
-            ticketController.ticketsList = ticketsList;
+            ticketView.productView = productView;
 
             bool systemON = true;
 
@@ -53,13 +35,13 @@ namespace GestaoDeEquipamentos
                 switch (int.Parse(option)) 
                 {
                     case 1:
-                        ProductOptions(productView, productController);
+                        ProductOptions(productView);
                         break;
                     case 2:
-                        TicketOptions(ticketView, ticketController);
+                        TicketOptions(ticketView);
                         break;
                     case 3:
-                        ManufactorOptions(manufactorView, manufactorController);
+                        ManufactorOptions(manufactorView);
                         break;
                     case 4:
                         systemON = false;
@@ -89,7 +71,7 @@ namespace GestaoDeEquipamentos
             return Console.ReadLine();
         }
 
-        static void ProductOptions(ProductView productView, ProductController productController)
+        static void ProductOptions(ProductView productView)
         {
             productView.MainHeader();
             string productOption = productView.Menu();
@@ -97,16 +79,16 @@ namespace GestaoDeEquipamentos
             switch (int.Parse(productOption))
             {
                 case 1:
-                    productController.Create();
+                    productView.Create();
                     break;
                 case 2:
-                    productController.Read();
+                    productView.Read();
                     break;
                 case 3:
-                    productController.Update();
+                    productView.Update();
                     break;
                 case 4:
-                    productController.Delete();
+                    productView.Delete();
                     break;
                 case 5:
                     break;
@@ -115,7 +97,7 @@ namespace GestaoDeEquipamentos
             }
         }
 
-        static void TicketOptions(TicketView ticketView, TicketController ticketController)
+        static void TicketOptions(TicketView ticketView)
         {
             ticketView.MainHeader();
             string ticketOption = ticketView.Menu();
@@ -123,16 +105,16 @@ namespace GestaoDeEquipamentos
             switch (int.Parse(ticketOption))
             {
                 case 1:
-                    ticketController.Create();
+                    ticketView.Create();
                     break;
                 case 2:
-                    ticketController.Read();
+                    ticketView.Read();
                     break;
                 case 3:
-                    ticketController.Update();
+                    ticketView.Update();
                     break;
                 case 4:
-                    ticketController.Delete();
+                    ticketView.Delete();
                     break;
                 case 5:
                     break;
@@ -141,7 +123,7 @@ namespace GestaoDeEquipamentos
             }
         }
 
-        static void ManufactorOptions(ManufactorView manufactorView, ManufactorController manufactorController)
+        static void ManufactorOptions(ManufactorView manufactorView)
         {
             manufactorView.MainHeader();
             string manufactorOption = manufactorView.Menu();
@@ -149,16 +131,16 @@ namespace GestaoDeEquipamentos
             switch (int.Parse(manufactorOption))
             {
                 case 1:
-                    manufactorController.Create();
+                    manufactorView.Create();
                     break;
                 case 2:
-                    manufactorController.Read();
+                    manufactorView.Read();
                     break;
                 case 3:
-                    manufactorController.Update();
+                    manufactorView.Update();
                     break;
                 case 4:
-                    manufactorController.Delete();
+                    manufactorView.Delete();
                     break;
                 case 5:
                     break;

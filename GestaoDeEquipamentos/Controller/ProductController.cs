@@ -1,50 +1,37 @@
 ﻿using GestaoDeEquipamentos.Model;
-using GestaoDeEquipamentos.View;
 
 namespace GestaoDeEquipamentos.Controller
 {
     public class ProductController
     {
-        public Product product;
-        public List<Product> productsList;
-        public ProductView productView;
-        public int idCount = 0;
+        public List<Product> productsList = new List<Product>();
+        private int idCount = 0;
 
-        public void Create()
+        public void CreateController(Product newProduct)
         {
-            productView.CreateHeader();
-            product = new Product();
             idCount++;
-            product.id = idCount;
-            product = productView.Inputs(product);
-            productsList.Add(product);
+            newProduct.id = idCount;
+            productsList.Add(newProduct);
         }
 
-        public void Read()
+        public void UpdateController(Product updatedProduct, int idToUpdate)
         {
-            productView.ShowList();
-        }
-
-        public void Update()
-        {
-            productView.UpdateHeader();
-            int idToUpdate = productView.GetID();
-
             foreach (Product p in productsList)
             {
                 if (idToUpdate == p.id)
                 {
-                    productView.Inputs(p);
+                    p.name = updatedProduct.name;
+                    p.price = updatedProduct.price;
+                    p.serialNumber = updatedProduct.serialNumber;
+                    p.manufactor = updatedProduct.manufactor;
+                    p.manufactoringDate = updatedProduct.manufactoringDate;
                     break;
                 }
             }
         }
 
-        public void Delete()
+        public void DeleteController(int idToDelete)
         {
-            productView.DeleteHeader();
-            int idToDelete = productView.GetID();
-
             foreach (Product p in productsList)
             {
                 if (idToDelete == p.id)

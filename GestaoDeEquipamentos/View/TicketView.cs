@@ -5,10 +5,14 @@ namespace GestaoDeEquipamentos.View
 {
     public class TicketView
     {
-        public List<Ticket> ticketsList;
-        public TicketController ticketController;
+        private TicketController ticketController;
         public ProductController productController;
         public ProductView productView;
+
+        public TicketView(TicketController ticketController)
+        {
+            this.ticketController = ticketController;
+        }
 
         public void MainHeader()
         {
@@ -18,36 +22,49 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("---------------------------");
         }
 
-        public void CreateHeader()
+        public void Create()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Registro de Chamado");
             Console.WriteLine("---------------------------\n");
+
+            Ticket newTicket = Inputs();
+            ticketController.CreateController(newTicket);
         }
 
-        public void ReadHeader()
+        public void Read()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Chamados Registrados");
             Console.WriteLine("---------------------------\n");
+
+            ShowList();
         }
 
-        public void UpdateHeader()
+        public void Update()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Edição de Chamado");
             Console.WriteLine("---------------------------\n");
+
+            int idToUpdate = GetID();
+            Console.WriteLine();
+            Ticket updatedTicket = Inputs();
+            ticketController.UpdateController(updatedTicket, idToUpdate);
         }
 
-        public void DeleteHeader()
+        public void Delete()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
             Console.WriteLine("Exclusão de Chamado");
             Console.WriteLine("---------------------------\n");
+
+            int idToDelete = GetID();
+            ticketController.DeleteController(idToDelete);
         }
 
         public string Menu()
@@ -62,27 +79,27 @@ namespace GestaoDeEquipamentos.View
             return Console.ReadLine();
         }
 
-        public Ticket Inputs(Ticket ticket)
+        public Ticket Inputs()
         {
             Console.Write("Título: ");
-            ticket.title = Console.ReadLine();
+            string title = Console.ReadLine();
             Console.Write("Descrição: ");
-            ticket.description = Console.ReadLine();
+            string description = Console.ReadLine();
+
             int idProduct = productView.GetID();
             Product product = productController.GetProductByID(idProduct);
-            ticket.product = product;
+
+            Ticket ticket = new Ticket(title, description, product);
 
             return ticket;
         }
 
         public void ShowList()
         {
-            ReadHeader();
-
             Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
                 "ID", "Título", "Descrição", "Equipamento", "Data de Abertura");
 
-            foreach (Ticket t in ticketsList)
+            foreach (Ticket t in ticketController.ticketsList)
             {
 
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
