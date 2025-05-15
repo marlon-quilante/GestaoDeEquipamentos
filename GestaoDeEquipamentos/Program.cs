@@ -1,5 +1,4 @@
-﻿using GestaoDeEquipamentos.Model;
-using GestaoDeEquipamentos.Controller;
+﻿using GestaoDeEquipamentos.Controller;
 using GestaoDeEquipamentos.View;
 
 namespace GestaoDeEquipamentos

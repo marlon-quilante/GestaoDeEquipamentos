@@ -28,6 +28,21 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("---------------------------\n");
 
             Manufactor newManufactor = Inputs();
+            string erros = newManufactor.Validate();
+
+            if (erros != "")
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(erros);
+                Console.ResetColor();
+                Console.Write("Pressione ENTER para continuar...");
+                Console.ReadLine();
+
+                Create();
+                return;
+            }
+
             manufactorController.CreateController(newManufactor);
         }
 
@@ -94,13 +109,13 @@ namespace GestaoDeEquipamentos.View
 
         private void ShowList()
         {
-            Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -10} | {4, -5}",
+            Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -5}",
                 "ID", "Nome", "Email", "Telefone", "Qtd de Produtos");
 
             foreach (Manufactor m in manufactorController.manufactorsList)
             {
 
-                Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -10} | {4, -5}",
+                Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -5}",
                     m.id, m.name, m.email, m.phone, manufactorController.GetProductsQty(m));
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
