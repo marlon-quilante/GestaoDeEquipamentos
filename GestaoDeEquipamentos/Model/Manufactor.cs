@@ -36,5 +36,12 @@ namespace GestaoDeEquipamentos.Model
 
             return erros;
         }
+
+        public void Update(Manufactor updatedManufactor)
+        {
+            this.name = updatedManufactor.name;
+            this.email = updatedManufactor.email;
+            this.phone = updatedManufactor.phone;
+        }
     }
 }

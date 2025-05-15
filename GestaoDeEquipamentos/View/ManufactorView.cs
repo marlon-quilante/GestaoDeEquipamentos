@@ -65,8 +65,8 @@ namespace GestaoDeEquipamentos.View
 
             int idToUpdate = GetID();
             Console.WriteLine();
-            Manufactor newManufactor = Inputs();
-            manufactorController.UpdateController(newManufactor, idToUpdate);
+            Manufactor updatedManufactor = Inputs();
+            manufactorController.UpdateController(updatedManufactor, idToUpdate);
         }
 
         public void Delete()

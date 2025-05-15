@@ -21,9 +21,7 @@ namespace GestaoDeEquipamentos.Controller
             {
                 if (idToUpdate == m.id)
                 {
-                    m.name = updatedManufactor.name;
-                    m.email = updatedManufactor.email;
-                    m.phone = updatedManufactor.phone;
+                    m.Update(updatedManufactor);
                     break;
                 }
             }
