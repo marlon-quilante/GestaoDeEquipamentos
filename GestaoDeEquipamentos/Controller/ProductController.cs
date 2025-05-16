@@ -20,11 +20,7 @@ namespace GestaoDeEquipamentos.Controller
             {
                 if (idToUpdate == p.id)
                 {
-                    p.name = updatedProduct.name;
-                    p.price = updatedProduct.price;
-                    p.serialNumber = updatedProduct.serialNumber;
-                    p.manufactor = updatedProduct.manufactor;
-                    p.manufactoringDate = updatedProduct.manufactoringDate;
+                    p.Update(updatedProduct);
                     break;
                 }
             }

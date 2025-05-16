@@ -30,6 +30,21 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("---------------------------\n");
 
             Product newProduct = Inputs();
+            string errors = newProduct.Validate();
+
+            if (errors != "")
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(errors);
+                Console.ResetColor();
+                Console.WriteLine("Pressione ENTER para continuar...");
+                Console.ReadLine();
+
+                Create();
+                return;
+            }
+
             productController.CreateController(newProduct);
         }
 

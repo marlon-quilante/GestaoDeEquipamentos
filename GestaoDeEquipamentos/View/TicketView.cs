@@ -30,6 +30,22 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("---------------------------\n");
 
             Ticket newTicket = Inputs();
+
+            string errors = newTicket.Validate();
+
+            if (errors != "")
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(errors);
+                Console.ResetColor();
+                Console.WriteLine("Pressione ENTER para continuar...");
+                Console.ReadLine();
+
+                Create();
+                return;
+            }
+
             ticketController.CreateController(newTicket);
         }
 
@@ -128,7 +144,6 @@ namespace GestaoDeEquipamentos.View
             }
             while (IDExists == false);
 
-            Console.WriteLine();
             return inputID;
         }
     }

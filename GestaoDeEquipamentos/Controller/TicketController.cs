@@ -21,9 +21,7 @@ namespace GestaoDeEquipamentos.Controller
             {
                 if (idToUpdate == t.id)
                 {
-                    t.title = updatedTicket.title;
-                    t.description = updatedTicket.description;
-                    t.product = updatedTicket.product;
+                    t.Update(updatedTicket);
                     break;
                 }       
             }

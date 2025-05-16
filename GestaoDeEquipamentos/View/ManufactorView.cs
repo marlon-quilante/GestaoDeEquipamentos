@@ -28,13 +28,13 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("---------------------------\n");
 
             Manufactor newManufactor = Inputs();
-            string erros = newManufactor.Validate();
+            string errors = newManufactor.Validate();
 
-            if (erros != "")
+            if (errors != "")
             {
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(erros);
+                Console.WriteLine(errors);
                 Console.ResetColor();
                 Console.Write("Pressione ENTER para continuar...");
                 Console.ReadLine();
