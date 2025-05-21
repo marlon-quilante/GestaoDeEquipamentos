@@ -112,8 +112,11 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -5}",
                 "ID", "Nome", "Email", "Telefone", "Qtd de Produtos");
 
-            foreach (Manufactor m in manufactorController.manufactorsList)
+            List<BaseRegister> registers = manufactorController.GetRegisters();
+
+            foreach (BaseRegister register in registers)
             {
+                Manufactor m = (Manufactor)register;
 
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -5}",
                     m.id, m.name, m.email, m.phone, manufactorController.GetProductsQty(m));

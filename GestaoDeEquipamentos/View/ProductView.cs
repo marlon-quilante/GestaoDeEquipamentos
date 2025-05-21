@@ -8,7 +8,6 @@ namespace GestaoDeEquipamentos.View
         private ProductController productController;
         public ManufactorView manufactorView;
         public ManufactorController manufactorController;
-
         public ProductView(ProductController productController)
         {
             this.productController = productController;
@@ -104,7 +103,7 @@ namespace GestaoDeEquipamentos.View
             int serialNumber = int.Parse(Console.ReadLine());
 
             int idManufactor = manufactorView.GetID();
-            Manufactor manufactor = manufactorController.GetManufactorByID(idManufactor);
+            Manufactor manufactor = (Manufactor)manufactorController.GetRegisterByID(idManufactor);
 
             Console.Write("Data de fabricação: ");
             DateTime manufacturingDate = Convert.ToDateTime(Console.ReadLine());
@@ -119,8 +118,11 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("{0, -5} | {1, -20} | {2, -10} | {3, -20} | {4, -20} | {5, -20}",
                 "ID", "Nome", "Preço", "Número de Série", "Fabricante", "Data de Fabricação");
 
-            foreach (Product p in productController.productsList)
+            List<BaseRegister> registers = productController.GetRegisters();
+
+            foreach (BaseRegister register in registers)
             {
+                Product p = (Product)register;
 
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -10} | {3, -20} | {4, -20} | {5, -20}",
                     p.id, p.name, p.price, p.serialNumber, p.manufactor.name, p.manufactoringDate.ToShortDateString());

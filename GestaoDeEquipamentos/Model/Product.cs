@@ -1,8 +1,7 @@
 ﻿namespace GestaoDeEquipamentos.Model
 {
-    public class Product
+    public class Product : BaseRegister
     {
-        public int id;
         public string name;
         public decimal price;
         public int serialNumber;
@@ -36,8 +35,10 @@
             return error;
         }
 
-        public void Update(Product updatedProduct)
+        public override void Update(BaseRegister updatedRegister)
         {
+            Product updatedProduct = (Product)updatedRegister;
+
             this.name = updatedProduct.name;
             this.price = updatedProduct.price;
             this.serialNumber = updatedProduct.serialNumber;

@@ -2,9 +2,8 @@
 
 namespace GestaoDeEquipamentos.Model
 {
-    public class Manufactor
+    public class Manufactor : BaseRegister
     {
-        public int id;
         public string name;
         public string email;
         public string phone;
@@ -36,8 +35,10 @@ namespace GestaoDeEquipamentos.Model
             return errors;
         }
 
-        public void Update(Manufactor updatedManufactor)
+        public override void Update(BaseRegister updatedRegister)
         {
+            Manufactor updatedManufactor = (Manufactor)updatedRegister;
+
             this.name = updatedManufactor.name;
             this.email = updatedManufactor.email;
             this.phone = updatedManufactor.phone;

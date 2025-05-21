@@ -103,9 +103,11 @@ namespace GestaoDeEquipamentos.View
             string description = Console.ReadLine();
 
             int idProduct = productView.GetID();
-            Product product = productController.GetProductByID(idProduct);
+            Product product = (Product)productController.GetRegisterByID(idProduct);
 
-            Ticket ticket = new Ticket(title, description, product);
+            DateTime openingDate = DateTime.Now;
+
+            Ticket ticket = new Ticket(title, description, product, openingDate);
 
             return ticket;
         }
@@ -115,8 +117,11 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
                 "ID", "Título", "Descrição", "Equipamento", "Data de Abertura");
 
-            foreach (Ticket t in ticketController.ticketsList)
+            List<BaseRegister> registers = ticketController.GetRegisters();
+
+            foreach (BaseRegister register in registers)
             {
+                Ticket t = (Ticket)register;
 
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
                     t.id, t.title, t.description, t.product.name, t.openingDate.ToShortDateString());
