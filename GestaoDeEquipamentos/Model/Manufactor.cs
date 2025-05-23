@@ -15,7 +15,7 @@ namespace GestaoDeEquipamentos.Model
             this.phone = phone;
         }
 
-        public string Validate()
+        public override string Validate()
         {
             string errors = "";
 

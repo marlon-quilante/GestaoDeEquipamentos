@@ -17,7 +17,7 @@
             this.manufactoringDate = manufactoringDate;
         }
 
-        public string Validate()
+        public override string Validate()
         {
             string error = "";
 

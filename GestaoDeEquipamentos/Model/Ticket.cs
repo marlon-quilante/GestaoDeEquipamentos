@@ -15,7 +15,7 @@
             this.openingDate = openingDate;
         }
 
-        public string Validate()
+        public override string Validate()
         {
             string error = "";
 

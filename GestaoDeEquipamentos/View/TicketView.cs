@@ -3,99 +3,18 @@ using GestaoDeEquipamentos.Model;
 
 namespace GestaoDeEquipamentos.View
 {
-    public class TicketView
+    public class TicketView : BaseView
     {
         private TicketController ticketController;
         public ProductController productController;
         public ProductView productView;
 
-        public TicketView(TicketController ticketController)
+        public TicketView(TicketController ticketController) : base ("Chamado", ticketController)
         {
             this.ticketController = ticketController;
         }
 
-        public void MainHeader()
-        {
-            Console.Clear();
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("Controle de Chamados");
-            Console.WriteLine("---------------------------");
-        }
-
-        public void Create()
-        {
-            Console.Clear();
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("Registro de Chamado");
-            Console.WriteLine("---------------------------\n");
-
-            Ticket newTicket = Inputs();
-
-            string errors = newTicket.Validate();
-
-            if (errors != "")
-            {
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(errors);
-                Console.ResetColor();
-                Console.WriteLine("Pressione ENTER para continuar...");
-                Console.ReadLine();
-
-                Create();
-                return;
-            }
-
-            ticketController.CreateController(newTicket);
-        }
-
-        public void Read()
-        {
-            Console.Clear();
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("Chamados Registrados");
-            Console.WriteLine("---------------------------\n");
-
-            ShowList();
-        }
-
-        public void Update()
-        {
-            Console.Clear();
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("Edição de Chamado");
-            Console.WriteLine("---------------------------\n");
-
-            int idToUpdate = GetID();
-            Console.WriteLine();
-            Ticket updatedTicket = Inputs();
-            ticketController.UpdateController(updatedTicket, idToUpdate);
-        }
-
-        public void Delete()
-        {
-            Console.Clear();
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("Exclusão de Chamado");
-            Console.WriteLine("---------------------------\n");
-
-            int idToDelete = GetID();
-            ticketController.DeleteController(idToDelete);
-        }
-
-        public string Menu()
-        {
-            Console.WriteLine("Selecione uma opção...\n");
-            Console.WriteLine("1- Cadastrar");
-            Console.WriteLine("2- Visualizar");
-            Console.WriteLine("3- Editar");
-            Console.WriteLine("4- Excluir");
-            Console.WriteLine("5- Voltar\n");
-
-            return Console.ReadLine();
-        }
-
-        public Ticket Inputs()
+        protected override Ticket Inputs()
         {
             Console.Write("Título: ");
             string title = Console.ReadLine();
@@ -112,7 +31,7 @@ namespace GestaoDeEquipamentos.View
             return ticket;
         }
 
-        public void ShowList()
+        protected override void ShowList()
         {
             Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
                 "ID", "Título", "Descrição", "Equipamento", "Data de Abertura");
@@ -128,28 +47,6 @@ namespace GestaoDeEquipamentos.View
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();
-        }
-
-        public int GetID()
-        {
-            int inputID = 0;
-            bool IDExists = false;
-
-            do
-            {
-                Console.Write("ID do chamado: ");
-                inputID = int.Parse(Console.ReadLine());
-                IDExists = ticketController.IDExists(inputID);
-
-                if (IDExists == false)
-                {
-                    Console.WriteLine("\nNão foi encontrado um chamado com este ID! Pressione ENTER e tente novamente...");
-                    Console.ReadLine();
-                }
-            }
-            while (IDExists == false);
-
-            return inputID;
         }
     }
 }

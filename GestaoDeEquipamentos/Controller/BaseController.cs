@@ -2,7 +2,7 @@
 
 namespace GestaoDeEquipamentos.Controller
 {
-    public class BaseController
+    public abstract class BaseController
     {
         public List<BaseRegister> registersList = new List<BaseRegister>();
         private int idCount = 0;
