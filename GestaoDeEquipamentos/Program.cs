@@ -1,4 +1,4 @@
-﻿using GestaoDeEquipamentos.View;
+﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 
 namespace GestaoDeEquipamentos
 {
@@ -8,13 +8,13 @@ namespace GestaoDeEquipamentos
         {
             bool systemON = true;
 
-            MainView mainView = new MainView();
+            TelaPrincipal mainView = new TelaPrincipal();
 
             while (systemON == true)
             {
                 mainView.MainHeader();
                 mainView.MainMenu();
-                BaseView chosenView = mainView.GetView();
+                ITela chosenView = mainView.GetView();
 
                 if (chosenView == null)
                 {

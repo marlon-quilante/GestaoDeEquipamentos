@@ -1,14 +1,14 @@
 ﻿using System.Net.Mail;
 
-namespace GestaoDeEquipamentos.Model
+namespace GestaoDeEquipamentos.Dominio
 {
-    public class Manufactor : BaseRegister
+    public class Fabricante : Equipamento<Fabricante>
     {
         public string name;
         public string email;
         public string phone;
 
-        public Manufactor(string name, string email, string phone)
+        public Fabricante(string name, string email, string phone)
         {
             this.name = name;
             this.email = email;
@@ -35,10 +35,8 @@ namespace GestaoDeEquipamentos.Model
             return errors;
         }
 
-        public override void Update(BaseRegister updatedRegister)
+        public override void Update(Fabricante updatedManufactor)
         {
-            Manufactor updatedManufactor = (Manufactor)updatedRegister;
-
             this.name = updatedManufactor.name;
             this.email = updatedManufactor.email;
             this.phone = updatedManufactor.phone;

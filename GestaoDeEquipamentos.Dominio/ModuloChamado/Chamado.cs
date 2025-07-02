@@ -1,13 +1,13 @@
-﻿namespace GestaoDeEquipamentos.Model
+﻿namespace GestaoDeEquipamentos.Dominio
 {
-    public class Ticket : BaseRegister
+    public class Chamado : Equipamento<Chamado>
     {
         public string title;
         public string description;
-        public Product product;
+        public Equipamento product;
         public DateTime openingDate;
 
-        public Ticket(string title, string description, Product product, DateTime openingDate)
+        public Chamado(string title, string description, Equipamento product, DateTime openingDate)
         {
             this.title = title;
             this.description = description;
@@ -32,10 +32,8 @@
             return error;
         }
 
-        public override void Update(BaseRegister updatedRegister)
+        public override void Update(Chamado updatedTicket)
         {
-            Ticket updatedTicket = (Ticket)updatedRegister;
-
             this.title = updatedTicket.title;
             this.description = updatedTicket.description;
             this.product = updatedTicket.product;

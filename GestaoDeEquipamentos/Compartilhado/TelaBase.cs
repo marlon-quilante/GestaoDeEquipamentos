@@ -1,17 +1,17 @@
-﻿using GestaoDeEquipamentos.Controller;
-using GestaoDeEquipamentos.Model;
+﻿using GestaoDeEquipamentos.Dominio;
+using GestaoDeEquipamentos.Infraestrutura.Arquivos;
 
-namespace GestaoDeEquipamentos.View
+namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 {
-    public abstract class BaseView
+    public abstract class TelaBase<T> where T : Equipamento<T>
     {
         private string entityName;
-        private BaseController baseController;
+        private RepositorioBase<T> RepositorioBase;
 
-        protected BaseView(string entityName, BaseController baseController)
+        protected TelaBase(string entityName, RepositorioBase<T> RepositorioBase)
         {
             this.entityName = entityName;
-            this.baseController = baseController;
+            this.RepositorioBase = RepositorioBase;
         }
 
         public void MainHeader()
@@ -34,7 +34,7 @@ namespace GestaoDeEquipamentos.View
             return Console.ReadLine();
         }
 
-        protected abstract BaseRegister Inputs();
+        protected abstract T Inputs();
 
         public void Create()
         {
@@ -43,7 +43,7 @@ namespace GestaoDeEquipamentos.View
             Console.WriteLine($"Cadastro de {entityName}");
             Console.WriteLine("---------------------------\n");
 
-            BaseRegister newRegister = Inputs();
+            T newRegister = Inputs();
             string errors = newRegister.Validate();
 
             if (errors != "")
@@ -61,7 +61,7 @@ namespace GestaoDeEquipamentos.View
 
             Console.WriteLine("\nCadastro realizado com sucesso!");
             Console.ReadLine();
-            baseController.CreateController(newRegister);
+            RepositorioBase.CreateController(newRegister);
         }
 
         public void Read()
@@ -83,8 +83,8 @@ namespace GestaoDeEquipamentos.View
 
             int idToUpdate = GetID();
             Console.WriteLine();
-            BaseRegister updatedRegister = Inputs();
-            baseController.UpdateController(updatedRegister, idToUpdate);
+            T updatedRegister = Inputs();
+            RepositorioBase.UpdateController(updatedRegister, idToUpdate);
         }
 
         public void Delete()
@@ -96,7 +96,7 @@ namespace GestaoDeEquipamentos.View
 
             int idToDelete = GetID();
 
-            baseController.DeleteController(idToDelete);
+            RepositorioBase.DeleteController(idToDelete);
         }
 
         protected abstract void ShowList();
@@ -110,7 +110,7 @@ namespace GestaoDeEquipamentos.View
             {
                 Console.Write($"ID do {entityName.ToLower()}: ");
                 inputID = int.Parse(Console.ReadLine());
-                IDExists = baseController.IDExists(inputID);
+                IDExists = RepositorioBase.IDExists(inputID);
 
                 if (IDExists == false)
                 {

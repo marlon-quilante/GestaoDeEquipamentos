@@ -1,22 +1,22 @@
-﻿using GestaoDeEquipamentos.Model;
+﻿using GestaoDeEquipamentos.Dominio;
 
-namespace GestaoDeEquipamentos.Controller
+namespace GestaoDeEquipamentos.Infraestrutura.Memoria
 {
-    public abstract class BaseController
+    public abstract class RepositorioBase<T> where T : Equipamento<T>
     {
-        public List<BaseRegister> registersList = new List<BaseRegister>();
+        public List<T> registersList = new List<T>();
         private int idCount = 0;
 
-        public void CreateController(BaseRegister newRegister)
+        public void CreateController(T newRegister)
         {
             idCount++;
             newRegister.id = idCount;
             registersList.Add(newRegister);
         }
 
-        public void UpdateController(BaseRegister updatedRegister, int idToUpdate)
+        public void UpdateController(T updatedRegister, int idToUpdate)
         {
-            foreach (BaseRegister register in registersList)
+            foreach (T register in registersList)
             {
                 if (idToUpdate == register.id)
                 {
@@ -28,7 +28,7 @@ namespace GestaoDeEquipamentos.Controller
 
         public void DeleteController(int idToDelete)
         {
-            foreach (BaseRegister register in registersList)
+            foreach (T register in registersList)
             {
                 if (idToDelete == register.id)
                 {
@@ -42,7 +42,7 @@ namespace GestaoDeEquipamentos.Controller
         {
             bool idExists = false;
 
-            foreach (BaseRegister register in registersList)
+            foreach (T register in registersList)
             {
                 if (idToValidate == register.id)
                 {
@@ -55,14 +55,14 @@ namespace GestaoDeEquipamentos.Controller
             return idExists;
         }
 
-        public List<BaseRegister> GetRegisters()
+        public List<T> GetRegisters()
         {
             return registersList;
         }
 
-        public BaseRegister GetRegisterByID(int id)
+        public T GetRegisterByID(int id)
         {
-            foreach (BaseRegister register in registersList)
+            foreach (T register in registersList)
             {
                 if (id == register.id)
                 {

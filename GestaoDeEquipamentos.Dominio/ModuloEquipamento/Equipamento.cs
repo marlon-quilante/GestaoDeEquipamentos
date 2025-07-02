@@ -1,14 +1,14 @@
-﻿namespace GestaoDeEquipamentos.Model
+﻿namespace GestaoDeEquipamentos.Dominio
 {
-    public class Product : BaseRegister
+    public class Equipamento : Equipamento<Equipamento>
     {
         public string name;
         public decimal price;
         public int serialNumber;
-        public Manufactor manufactor;
+        public Fabricante manufactor;
         public DateTime manufactoringDate;
 
-        public Product(string name, decimal price, int serialNumber, Manufactor manufactor, DateTime manufactoringDate)
+        public Equipamento(string name, decimal price, int serialNumber, Fabricante manufactor, DateTime manufactoringDate)
         {
             this.name = name;
             this.price = price;
@@ -35,10 +35,8 @@
             return error;
         }
 
-        public override void Update(BaseRegister updatedRegister)
+        public override void Update(Equipamento updatedProduct)
         {
-            Product updatedProduct = (Product)updatedRegister;
-
             this.name = updatedProduct.name;
             this.price = updatedProduct.price;
             this.serialNumber = updatedProduct.serialNumber;
