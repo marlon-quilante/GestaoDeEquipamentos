@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoDeEquipamentos.Infrae
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoDeEquipamentos.Infraestrutura.Memoria", "GestaoDeEquipamento.Infraestrutura.Memoria\GestaoDeEquipamentos.Infraestrutura.Memoria.csproj", "{A1C3AB3A-3CFE-43C4-AB14-ABD0E1853103}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoDeEquipamentos.WebApp", "GestaoDeEquipamentos.WebApp\GestaoDeEquipamentos.WebApp.csproj", "{B705DBAB-EF09-4D3C-B0CC-B05646700A6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A1C3AB3A-3CFE-43C4-AB14-ABD0E1853103}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1C3AB3A-3CFE-43C4-AB14-ABD0E1853103}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1C3AB3A-3CFE-43C4-AB14-ABD0E1853103}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B705DBAB-EF09-4D3C-B0CC-B05646700A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B705DBAB-EF09-4D3C-B0CC-B05646700A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B705DBAB-EF09-4D3C-B0CC-B05646700A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B705DBAB-EF09-4D3C-B0CC-B05646700A6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
