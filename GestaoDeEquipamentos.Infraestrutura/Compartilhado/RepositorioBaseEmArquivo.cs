@@ -1,41 +1,55 @@
 ﻿using GestaoDeEquipamentos.Dominio;
+using GestaoDeEquipamentos.Infraestrutura.Arquivos.Compartilhado;
 
 namespace GestaoDeEquipamentos.Infraestrutura.Arquivos
 {
-    public abstract class RepositorioBase<T> where T : Equipamento<T>
+    public abstract class RepositorioBaseEmArquivo<T> where T : EntidadeBase<T>
     {
         public List<T> registersList = new List<T>();
-        private int idCount = 0;
+        protected ContextoDados context;
 
-        public void CreateController(T newRegister)
+        protected RepositorioBaseEmArquivo(ContextoDados context)
         {
-            idCount++;
-            newRegister.id = idCount;
-            registersList.Add(newRegister);
+            this.context = context;
+            this.registersList = GetRegisters();
         }
 
-        public void UpdateController(T updatedRegister, int idToUpdate)
+        public void Create(T newRegister)
+        {
+            newRegister.Id = GetLastID() + 1;
+            registersList.Add(newRegister);
+
+            context.Save();
+        }
+
+        public abstract int GetLastID();
+
+        public void Update(T updatedRegister, int idToUpdate)
         {
             foreach (T register in registersList)
             {
-                if (idToUpdate == register.id)
+                if (idToUpdate == register.Id)
                 {
                     register.Update(updatedRegister);
                     break;
                 }
             }
+
+            context.Save();
         }
 
-        public void DeleteController(int idToDelete)
+        public void Delete(int idToDelete)
         {
             foreach (T register in registersList)
             {
-                if (idToDelete == register.id)
+                if (idToDelete == register.Id)
                 {
                     registersList.Remove(register);
                     break;
                 }
             }
+
+            context.Save();
         }
 
         public bool IDExists(int idToValidate)
@@ -44,7 +58,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Arquivos
 
             foreach (T register in registersList)
             {
-                if (idToValidate == register.id)
+                if (idToValidate == register.Id)
                 {
                     idExists = true;
                     break;
@@ -55,21 +69,18 @@ namespace GestaoDeEquipamentos.Infraestrutura.Arquivos
             return idExists;
         }
 
-        public List<T> GetRegisters()
-        {
-            return registersList;
-        }
-
         public T GetRegisterByID(int id)
         {
             foreach (T register in registersList)
             {
-                if (id == register.id)
+                if (id == register.Id)
                 {
                     return register;
                 }
             }
             return null;
         }
+
+        public abstract List<T> GetRegisters();
     }
 }

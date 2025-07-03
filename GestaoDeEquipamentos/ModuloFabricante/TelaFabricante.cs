@@ -6,9 +6,10 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 {
     public class TelaFabricante : TelaBase<Fabricante>, ITela
     {
-        private RepositorioFabricante RepositorioFabricante;
+        private RepositorioFabricanteEmArquivo RepositorioFabricante;
 
-        public TelaFabricante(RepositorioFabricante RepositorioFabricante) : base("Fabricante", RepositorioFabricante)
+        public TelaFabricante(RepositorioFabricanteEmArquivo RepositorioFabricante) 
+            : base("Fabricante", RepositorioFabricante)
         {
             this.RepositorioFabricante = RepositorioFabricante;
         }
@@ -37,7 +38,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             foreach (Fabricante manufactor in manufactors)
             {
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -5}",
-                    manufactor.id, manufactor.name, manufactor.email, manufactor.phone, RepositorioFabricante.GetProductsQty(manufactor));
+                    manufactor.Id, manufactor.Name, manufactor.Email, manufactor.Phone, RepositorioFabricante.GetProductsQty(manufactor));
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();

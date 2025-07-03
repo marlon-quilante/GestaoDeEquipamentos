@@ -2,7 +2,7 @@
 
 namespace GestaoDeEquipamentos.Infraestrutura.Memoria
 {
-    public abstract class RepositorioBase<T> where T : Equipamento<T>
+    public abstract class RepositorioBaseEmMemoria<T> where T : EntidadeBase<T>
     {
         public List<T> registersList = new List<T>();
         private int idCount = 0;
@@ -10,7 +10,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Memoria
         public void CreateController(T newRegister)
         {
             idCount++;
-            newRegister.id = idCount;
+            newRegister.Id = idCount;
             registersList.Add(newRegister);
         }
 
@@ -18,7 +18,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Memoria
         {
             foreach (T register in registersList)
             {
-                if (idToUpdate == register.id)
+                if (idToUpdate == register.Id)
                 {
                     register.Update(updatedRegister);
                     break;
@@ -30,7 +30,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Memoria
         {
             foreach (T register in registersList)
             {
-                if (idToDelete == register.id)
+                if (idToDelete == register.Id)
                 {
                     registersList.Remove(register);
                     break;
@@ -44,7 +44,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Memoria
 
             foreach (T register in registersList)
             {
-                if (idToValidate == register.id)
+                if (idToValidate == register.Id)
                 {
                     idExists = true;
                     break;
@@ -64,7 +64,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Memoria
         {
             foreach (T register in registersList)
             {
-                if (id == register.id)
+                if (id == register.Id)
                 {
                     return register;
                 }

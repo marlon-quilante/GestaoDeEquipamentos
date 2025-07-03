@@ -2,6 +2,7 @@
 using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 using GestaoDeEquipamentos.Infraestrutura.Arquivos;
+using GestaoDeEquipamentos.Infraestrutura.Arquivos.Compartilhado;
 
 namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 {
@@ -9,9 +10,11 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
     {
         private char option;
 
-        private RepositorioFabricante RepositorioFabricante;
-        private RepositorioEquipamento RepositorioEquipamento;
-        private RepositorioChamado RepositorioChamado;
+        private ContextoDados context;
+
+        private RepositorioFabricanteEmArquivo RepositorioFabricante;
+        private RepositorioEquipamentoEmArquivo RepositorioEquipamento;
+        private RepositorioChamadoEmArquivo RepositorioChamado;
 
         private TelaFabricante manufactorView;
         private TelaEquipamento productView;
@@ -19,9 +22,11 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 
         public TelaPrincipal()
         {
-            RepositorioFabricante = new RepositorioFabricante();
-            RepositorioEquipamento = new RepositorioEquipamento();
-            RepositorioChamado = new RepositorioChamado();
+            context = new ContextoDados(true);
+
+            RepositorioFabricante = new RepositorioFabricanteEmArquivo(context);
+            RepositorioEquipamento = new RepositorioEquipamentoEmArquivo(context);
+            RepositorioChamado = new RepositorioChamadoEmArquivo(context);
 
             manufactorView = new TelaFabricante(RepositorioFabricante);
             productView = new TelaEquipamento(RepositorioEquipamento);

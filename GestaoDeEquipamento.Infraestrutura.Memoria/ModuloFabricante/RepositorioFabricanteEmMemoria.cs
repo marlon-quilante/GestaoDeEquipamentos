@@ -2,9 +2,9 @@
 
 namespace GestaoDeEquipamentos.Infraestrutura.Memoria
 {
-    public class RepositorioFabricante : RepositorioBase<Fabricante>
+    public class RepositorioFabricanteEmMemoria : RepositorioBaseEmMemoria<Fabricante>
     {
-        public RepositorioEquipamento RepositorioEquipamento;
+        public RepositorioEquipamentoEmMemoria RepositorioEquipamento;
 
         public int GetProductsQty(Fabricante manufactor)
         {
@@ -14,7 +14,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Memoria
 
             foreach (Equipamento product in products)
             {
-                if (manufactor.id == product.manufactor.id)
+                if (manufactor.Id == product.Manufactor.Id)
                     number++;
             }
             return number;

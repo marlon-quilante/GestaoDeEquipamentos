@@ -7,10 +7,10 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
 {
     public class TelaEquipamento : TelaBase<Equipamento>, ITela
     {
-        private RepositorioEquipamento RepositorioEquipamento;
+        private RepositorioEquipamentoEmArquivo RepositorioEquipamento;
         public TelaFabricante manufactorView;
-        public RepositorioFabricante RepositorioFabricante;
-        public TelaEquipamento(RepositorioEquipamento RepositorioEquipamento) : base("Equipamento", RepositorioEquipamento)
+        public RepositorioFabricanteEmArquivo RepositorioFabricante;
+        public TelaEquipamento(RepositorioEquipamentoEmArquivo RepositorioEquipamento) : base("Equipamento", RepositorioEquipamento)
         {
             this.RepositorioEquipamento = RepositorioEquipamento;
         }
@@ -46,8 +46,8 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
             {
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -10} |" +
                     " {3, -20} | {4, -20} | {5, -20}",
-                    product.id, product.name, product.price.ToString("F2"), product.serialNumber,
-                    product.manufactor.name, product.manufactoringDate.ToShortDateString());
+                    product.Id, product.Name, product.Price.ToString("F2"), product.SerialNumber,
+                    product.Manufactor.Name, product.ManufactoringDate.ToShortDateString());
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();

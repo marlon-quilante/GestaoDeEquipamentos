@@ -1,8 +1,8 @@
 ﻿namespace GestaoDeEquipamentos.Dominio;
 
-public abstract class Equipamento<T>
+public abstract class EntidadeBase<T>
 {
-    public int id;
+    public int Id { get; set; }
 
     public abstract string Validate();
 

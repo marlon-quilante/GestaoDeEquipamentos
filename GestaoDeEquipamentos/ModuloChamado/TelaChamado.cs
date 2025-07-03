@@ -7,11 +7,11 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 {
     public class TelaChamado : TelaBase<Chamado>, ITela
     {
-        private RepositorioChamado RepositorioChamado;
-        public RepositorioEquipamento RepositorioEquipamento;
+        private RepositorioChamadoEmArquivo RepositorioChamado;
+        public RepositorioEquipamentoEmArquivo RepositorioEquipamento;
         public TelaEquipamento productView;
 
-        public TelaChamado(RepositorioChamado RepositorioChamado) : base("Chamado", RepositorioChamado)
+        public TelaChamado(RepositorioChamadoEmArquivo RepositorioChamado) : base("Chamado", RepositorioChamado)
         {
             this.RepositorioChamado = RepositorioChamado;
         }
@@ -43,7 +43,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             foreach (Chamado ticket in tickets)
             {
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
-                    ticket.id, ticket.title, ticket.description, ticket.product.name, ticket.openingDate.ToShortDateString());
+                    ticket.Id, ticket.Title, ticket.Description, ticket.Product.Name, ticket.OpeningDate.ToShortDateString());
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();

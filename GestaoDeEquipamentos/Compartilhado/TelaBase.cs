@@ -3,12 +3,12 @@ using GestaoDeEquipamentos.Infraestrutura.Arquivos;
 
 namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 {
-    public abstract class TelaBase<T> where T : Equipamento<T>
+    public abstract class TelaBase<T> where T : EntidadeBase<T>
     {
         private string entityName;
-        private RepositorioBase<T> RepositorioBase;
+        private RepositorioBaseEmArquivo<T> RepositorioBase;
 
-        protected TelaBase(string entityName, RepositorioBase<T> RepositorioBase)
+        protected TelaBase(string entityName, RepositorioBaseEmArquivo<T> RepositorioBase)
         {
             this.entityName = entityName;
             this.RepositorioBase = RepositorioBase;
@@ -61,7 +61,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 
             Console.WriteLine("\nCadastro realizado com sucesso!");
             Console.ReadLine();
-            RepositorioBase.CreateController(newRegister);
+            RepositorioBase.Create(newRegister);
         }
 
         public void Read()
@@ -84,7 +84,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
             int idToUpdate = GetID();
             Console.WriteLine();
             T updatedRegister = Inputs();
-            RepositorioBase.UpdateController(updatedRegister, idToUpdate);
+            RepositorioBase.Update(updatedRegister, idToUpdate);
         }
 
         public void Delete()
@@ -96,7 +96,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 
             int idToDelete = GetID();
 
-            RepositorioBase.DeleteController(idToDelete);
+            RepositorioBase.Delete(idToDelete);
         }
 
         protected abstract void ShowList();
