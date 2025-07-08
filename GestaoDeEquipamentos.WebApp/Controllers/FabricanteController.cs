@@ -35,7 +35,48 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
 
             repositoryManufactor.Create(newManufactor);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Editar(int id)
+        {
+            Fabricante manufactor = repositoryManufactor.GetRegisterByID(id);
+
+            if (manufactor == null)
+                return RedirectToAction(nameof(Index));
+
+            return View(manufactor);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(int id, string name, string email, string phone)
+        {
+            Fabricante updatedManufactor = new Fabricante(name, email, phone);
+
+            bool successEdit = repositoryManufactor.Update(updatedManufactor, id);
+
+            if (!successEdit)
+                return RedirectToAction(nameof(Index));
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Excluir(int id)
+        {
+            Fabricante manufactor = repositoryManufactor.GetRegisterByID(id);
+
+            if (manufactor == null)
+                return RedirectToAction(nameof(Index));
+
+            return View(manufactor);
+        }
+
+        [HttpPost]
+        public IActionResult ExcluirConfirmado(int id)
+        {
+            repositoryManufactor.Delete(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -10,6 +10,9 @@
 <ul>
     @foreach (Fabricante manufactor in Model)
     {
-        <li>@manufactor.Name / @manufactor.Email / @manufactor.Phone</li>
+        <li>@manufactor.Name / @manufactor.Email / @manufactor.Phone / 
+            <a href="/Fabricante/Editar/@manufactor.Id">Editar</a>
+            <a href="/Fabricante/Excluir/@manufactor.Id">Excluir</a>
+        </li>
     }
 </ul>

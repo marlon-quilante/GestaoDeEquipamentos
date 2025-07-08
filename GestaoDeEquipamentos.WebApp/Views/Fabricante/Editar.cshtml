@@ -1,0 +1,31 @@
+﻿@using GestaoDeEquipamentos.Dominio
+
+@model Fabricante;
+
+<h1>Edição de Fabricante</h1>
+
+<hr />
+
+<a href="/Fabricante/Index">Visualizar Fabricantes</a>
+
+<hr />
+
+<form action="/Fabricante/Editar/@Model.Id" method="post">
+    <label>Nome:</label>
+    <br />
+    <input name="Name" value="@Model.Name" />
+    <br />
+
+    <label>Email:</label>
+    <br />
+    <input name="Email" value="@Model.Email" />
+    <br />
+
+    <label>Telefone:</label>
+    <br />
+    <input name="Phone" value="@Model.Phone" />
+    <br />
+
+    <br />
+    <button>Salvar</button>
+</form>

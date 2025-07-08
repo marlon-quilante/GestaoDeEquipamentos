@@ -24,7 +24,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Arquivos
 
         public abstract int GetLastID();
 
-        public void Update(T updatedRegister, int idToUpdate)
+        public bool Update(T updatedRegister, int idToUpdate)
         {
             foreach (T register in registersList)
             {
@@ -34,8 +34,8 @@ namespace GestaoDeEquipamentos.Infraestrutura.Arquivos
                     break;
                 }
             }
-
             context.Save();
+            return true;
         }
 
         public void Delete(int idToDelete)
