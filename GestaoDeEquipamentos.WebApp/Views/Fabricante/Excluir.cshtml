@@ -2,18 +2,40 @@
 
 @model Fabricante;
 
-<h1>Exclusão de Fabricante</h1>
+<html>
+
+<head>
+    @* Bootstrap *@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+    <title>Exclusão de Fabricante | Gestão de Equipamentos</title>
+</head>
+
+<body data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Gestão de Equipamentos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="container my-2">
+        <h1>Exclusão de Fabricante</h1>
+    </header>
+</body>
 
 <hr />
 
-<a href="/Fabricante/Index">Visualizar Fabricantes</a>
+<div class="container my-2">
+    <form action="/Fabricante/ExcluirConfirmado/@Model.Id" method="post">
+        <p class="fw-bold">Deseja realmente excluir o registro "@Model.Name"?</p>
 
-<hr />
+        <a class="btn btn-secondary" href="/Fabricante">Voltar</a>
+        <button class="btn btn-danger">Excluir</button>
+    </form>
+</div>
 
-<form action="/Fabricante/ExcluirConfirmado/@Model.Id" method="post">
-    <p>Deseja realmente excluir o registro "@Model.Name"?</p>
-
-    <a href="/Fabricante">Voltar</a>
-
-    <button>Excluir</button>
-</form>
+</html>

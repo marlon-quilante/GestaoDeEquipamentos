@@ -1,27 +1,50 @@
-﻿<h1>Cadastro de Fabricante</h1>
+﻿<html>
+
+<head>
+    @* Bootstrap *@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+    <title>Cadastro de Fabricante | Gestão de Equipamentos</title>
+</head>
+
+<body data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Gestão de Equipamentos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="container my-2">
+        <h1>Cadastro de Fabricante</h1>
+    </header>
+</body>
 
 <hr />
 
-<a href="/Fabricante/Index">Visualizar Fabricantes</a>
+<div class="container my-2">
+    <form action="/Fabricante/Cadastrar" method="post">
+        <div class="mb-3">
+            <label class="form-label">Nome:</label>
+            <input name="Name" type="text" class="form-control" placeholder="Digite o nome do fabricante...">
+        </div>
 
-<hr />
+        <div class="mb-3">
+            <label class="form-label">Email:</label>
+            <input name="Email" type="email" class="form-control" placeholder="Digite o email do fabricante...">
+        </div>
 
-<form action="/Fabricante/Cadastrar" method="post">
-    <label>Nome:</label>
-    <br />
-    <input name="Name"/>
-    <br />
+        <div class="mb-3">
+            <label class="form-label">Telefone:</label>
+            <input name="Phone" type="tel" class="form-control" placeholder="Digite o telefone do fabricante...">
+        </div>
 
-    <label>Email:</label>
-    <br />
-    <input name="Email" />
-    <br />
+        <a class="btn btn-secondary" href="/Fabricante">Voltar</a>
+        <button class="btn btn-success" type="submit">Salvar</button>
+    </form>
+</div>
 
-    <label>Telefone:</label>
-    <br />
-    <input name="Phone" />
-    <br />
-
-    <br />
-    <button>Salvar</button>
-</form>
+</html>
