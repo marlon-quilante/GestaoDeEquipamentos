@@ -12,4 +12,8 @@
     <ProjectReference Include="..\GestaoDeEquipamentos.Infraestrutura\GestaoDeEquipamentos.Infraestrutura.Arquivos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Icons\product-durability.png" />
+  </ItemGroup>
+
 </Project>
