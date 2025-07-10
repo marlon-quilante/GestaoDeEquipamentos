@@ -7,8 +7,10 @@
 <head>
     @* Bootstrap *@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+    @* Bootstrap Icons *@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <title>Fabricantes | Gestão de Equipamentos</title>
 </head>
@@ -37,36 +39,38 @@
             </div>
         </div>
     </nav>
-    
+
+    @* Cabeçalho da página *@
     <header class="container my-2">
         <h1>Gestão de Fabricantes</h1>
     </header>
+
     <hr />
     <div class="container my-2">
-        <a class="btn btn-primary mb-2" href="/Fabricante/Cadastrar">Cadastrar</a>
+        <a class="btn btn-primary mb-2" href="/Fabricante/Cadastrar"><i class="bi bi-plus-circle"></i> Cadastrar</a>
     </div>
-    <div>
-        <main class="container my-2">
-            <div class="row">
-                @foreach (Fabricante manufactor in Model)
-                {
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">@manufactor.Name</h5>
-                                <p class="card-text mb-0"><strong>Email: </strong>@manufactor.Email</p>
-                                <p class="card-text mb-0"><strong>Telefone: </strong>@manufactor.Phone</p>
-                            </div>
 
-                            <div class="card-actions ms-auto me-3 mb-3">
-                                <a class="btn btn-sm btn-primary" href="/Fabricante/Editar/@manufactor.Id">Editar</a>
-                                <a class="btn btn-sm btn-danger" href="/Fabricante/Excluir/@manufactor.Id">Excluir</a>
-                            </div>
+    @* Conteúdo principal da página *@
+    <main class="container my-2">
+        <div class="row">
+            @foreach (Fabricante manufactor in Model)
+            {
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@manufactor.Name</h5>
+                            <p class="card-text mb-0"><strong>Email: </strong>@manufactor.Email</p>
+                            <p class="card-text mb-0"><strong>Telefone: </strong>@manufactor.Phone</p>
+                        </div>
+
+                        <div class="card-actions ms-auto me-3 mb-3 d-flex gap-1">
+                            <a class="btn btn-sm btn-primary rounded-circle d-flex justify-content-center align-items-center" style="height:30px" href="/Fabricante/Editar/@manufactor.Id"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-sm btn-danger rounded-circle d-flex justify-content-center align-items-center" style="height:30px" href="/Fabricante/Excluir/@manufactor.Id"><i class="bi bi-trash"></i></a>
                         </div>
                     </div>
-                }
-            </div>
-        </main>
+                </div>
+            }
+    </main>
     </div>
 </body>
 </html>
