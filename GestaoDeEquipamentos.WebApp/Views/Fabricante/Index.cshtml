@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a href="/Home">
-                <img src="@Url.Content("~/Icons/product-durability.png")" alt="Ícone de produto" style="width: 40px; height: 40px;">
+                <img src="@Url.Content("~/Icons/m.png")" style="width: 60px; height: 60px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,13 +27,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-2">
-                        <a class="btn btn-outline-info" href="/Fabricante">Fabricantes</a>
+                        <a class="btn btn-outline-info" style="height: 50px; align-content:center" href="/Fabricante">Fabricantes</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="btn btn-outline-info" href="/Equipamento">Equipamentos</a>
+                        <a class="btn btn-outline-info" style="height: 50px; align-content:center" href="/Equipamento">Equipamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-info" href="/Chamado">Chamados</a>
+                        <a class="btn btn-outline-info" style="height: 50px; align-content:center" href="/Chamado">Chamados</a>
                     </li>
                 </ul>
             </div>
@@ -52,7 +52,7 @@
 
     @* Conteúdo principal da página *@
     <main class="container my-2">
-        <div class="row">
+        <div class="row g-2">
             @foreach (Fabricante manufactor in Model)
             {
                 <div class="col-4">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
             }
+        </div>
     </main>
-    </div>
 </body>
 </html>
