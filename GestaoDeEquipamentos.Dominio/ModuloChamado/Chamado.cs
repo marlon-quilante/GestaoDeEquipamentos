@@ -2,44 +2,44 @@
 {
     public class Chamado : EntidadeBase<Chamado>
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public Equipamento Product { get; set; }
-        public DateTime OpeningDate { get; set; }
+        public string Titulo { get; set; }
+        public string Descricao { get; set; }
+        public Equipamento Equipamento { get; set; }
+        public DateTime DataAbertura { get; set; }
 
         public Chamado() { }
 
-        public Chamado(string title, string description, 
-            Equipamento product, DateTime openingDate) : this()
+        public Chamado(string titulo, string descricao, 
+            Equipamento equipamento, DateTime dataAbertura) : this()
         {
-            this.Title = title;
-            this.Description = description;
-            this.Product = product;
-            this.OpeningDate = openingDate;
+            this.Titulo = titulo;
+            this.Descricao = descricao;
+            this.Equipamento = equipamento;
+            this.DataAbertura = dataAbertura;
         }
 
-        public override string Validate()
+        public override string Validacao()
         {
-            string error = "";
+            string erros = "";
 
-            if (string.IsNullOrWhiteSpace(Title))
-                error += "O título é obrigatório!\n";
-            else if (Title.Length < 2)
-                error += "O título precisa conter mais do que 1 caractere!\n";
+            if (string.IsNullOrWhiteSpace(Titulo))
+                erros += "O título é obrigatório!\n";
+            else if (Titulo.Length < 2)
+                erros += "O título precisa conter mais do que 1 caractere!\n";
 
-            if (string.IsNullOrWhiteSpace(Description))
-                error += "A descrição é obrigatória!\n";
-            else if (Description.Length < 2)
-                error += "A descrição precisa conter mais do que 1 caractere!\n";
+            if (string.IsNullOrWhiteSpace(Descricao))
+                erros += "A descrição é obrigatória!\n";
+            else if (Descricao.Length < 2)
+                erros += "A descrição precisa conter mais do que 1 caractere!\n";
 
-            return error;
+            return erros;
         }
 
-        public override void Update(Chamado updatedTicket)
+        public override void Editar(Chamado chamadoAtualizado)
         {
-            this.Title = updatedTicket.Title;
-            this.Description = updatedTicket.Description;
-            this.Product = updatedTicket.Product;
+            this.Titulo = chamadoAtualizado.Titulo;
+            this.Descricao = chamadoAtualizado.Descricao;
+            this.Equipamento = chamadoAtualizado.Equipamento;
         }
     }
 }

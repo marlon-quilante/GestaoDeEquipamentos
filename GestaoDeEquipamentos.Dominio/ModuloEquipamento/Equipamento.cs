@@ -2,49 +2,49 @@
 {
     public class Equipamento : EntidadeBase<Equipamento>
     {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int SerialNumber { get; set; }
-        public Fabricante Manufactor { get; set; }
-        public DateTime ManufactoringDate { get; set; }
+        public string Nome { get; set; }
+        public decimal Preco { get; set; }
+        public int NumeroSerie { get; set; }
+        public Fabricante Fabricante { get; set; }
+        public DateTime DataFabricacao { get; set; }
 
         public Equipamento() { }
 
-        public Equipamento(string name, decimal price, int serialNumber, 
-            Fabricante manufactor, DateTime manufactoringDate) : this()
+        public Equipamento(string nome, decimal preco, int numeroSerie, 
+            Fabricante fabricante, DateTime dataFabricacao) : this()
         {
-            this.Name = name;
-            this.Price = price;
-            this.SerialNumber = serialNumber;
-            this.Manufactor = manufactor;
-            this.ManufactoringDate = manufactoringDate;
+            this.Nome = nome;
+            this.Preco = preco;
+            this.NumeroSerie = numeroSerie;
+            this.Fabricante = fabricante;
+            this.DataFabricacao = dataFabricacao;
         }
 
-        public override string Validate()
+        public override string Validacao()
         {
-            string error = "";
+            string erros = "";
 
-            if (string.IsNullOrWhiteSpace(Name))
-                error += "O nome é obrigatório!\n";
-            else if (Name.Length < 2)
-                error += "O nome precisa conter mais do que 1 caractere!\n";
+            if (string.IsNullOrWhiteSpace(Nome))
+                erros += "O nome é obrigatório!\n";
+            else if (Nome.Length < 2)
+                erros += "O nome precisa conter mais do que 1 caractere!\n";
 
-            if (!decimal.IsCanonical(Price))
-                error += "O preço digitado não é válido!\n";
+            if (!decimal.IsCanonical(Preco))
+                erros += "O preço digitado não é válido!\n";
 
-            if (!int.IsPositive(SerialNumber))
-                error += "O número de série digitado não é válido!\n";
+            if (!int.IsPositive(NumeroSerie))
+                erros += "O número de série digitado não é válido!\n";
 
-            return error;
+            return erros;
         }
 
-        public override void Update(Equipamento updatedProduct)
+        public override void Editar(Equipamento equipamentoEditado)
         {
-            this.Name = updatedProduct.Name;
-            this.Price = updatedProduct.Price;
-            this.SerialNumber = updatedProduct.SerialNumber;
-            this.Manufactor = updatedProduct.Manufactor;
-            this.ManufactoringDate = updatedProduct.ManufactoringDate;
+            this.Nome = equipamentoEditado.Nome;
+            this.Preco = equipamentoEditado.Preco;
+            this.NumeroSerie = equipamentoEditado.NumeroSerie;
+            this.Fabricante = equipamentoEditado.Fabricante;
+            this.DataFabricacao = equipamentoEditado.DataFabricacao;
         }
     }
 }

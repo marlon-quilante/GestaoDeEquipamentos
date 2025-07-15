@@ -6,18 +6,18 @@ namespace GestaoDeEquipamentos.Infraestrutura.Memoria
     {
         public RepositorioEquipamentoEmMemoria RepositorioEquipamento;
 
-        public int GetProductsQty(Fabricante manufactor)
+        public int ObterQtdProdutos(Fabricante fabricante)
         {
-            int number = 0;
+            int quantidade = 0;
 
-            List<Equipamento> products = RepositorioEquipamento.GetRegisters();
+            List<Equipamento> equipamentos = RepositorioEquipamento.ObterRegistros();
 
-            foreach (Equipamento product in products)
+            foreach (Equipamento e in equipamentos)
             {
-                if (manufactor.Id == product.Manufactor.Id)
-                    number++;
+                if (fabricante.Id == e.Fabricante.Id)
+                    quantidade++;
             }
-            return number;
+            return quantidade;
         }
     }
 }

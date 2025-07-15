@@ -5,20 +5,20 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 {
     public abstract class TelaBase<T> where T : EntidadeBase<T>
     {
-        private string entityName;
+        private string nomeEntidade;
         private RepositorioBaseEmArquivo<T> RepositorioBase;
 
-        protected TelaBase(string entityName, RepositorioBaseEmArquivo<T> RepositorioBase)
+        protected TelaBase(string nomeEntidade, RepositorioBaseEmArquivo<T> RepositorioBase)
         {
-            this.entityName = entityName;
+            this.nomeEntidade = nomeEntidade;
             this.RepositorioBase = RepositorioBase;
         }
 
-        public void MainHeader()
+        public void CabecalhoPrincipal()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine($"Controle de {entityName}s");
+            Console.WriteLine($"Controle de {nomeEntidade}s");
             Console.WriteLine("---------------------------");
         }
 
@@ -34,93 +34,93 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
             return Console.ReadLine();
         }
 
-        protected abstract T Inputs();
+        protected abstract T Dados();
 
-        public void Create()
+        public void Cadastrar()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine($"Cadastro de {entityName}");
+            Console.WriteLine($"Cadastro de {nomeEntidade}");
             Console.WriteLine("---------------------------\n");
 
-            T newRegister = Inputs();
-            string errors = newRegister.Validate();
+            T novoRegistro = Dados();
+            string erros = novoRegistro.Validacao();
 
-            if (errors != "")
+            if (erros != "")
             {
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(errors);
+                Console.WriteLine(erros);
                 Console.ResetColor();
                 Console.Write("Pressione ENTER para continuar...");
                 Console.ReadLine();
 
-                Create();
+                Cadastrar();
                 return;
             }
 
             Console.WriteLine("\nCadastro realizado com sucesso!");
             Console.ReadLine();
-            RepositorioBase.Create(newRegister);
+            RepositorioBase.Cadastrar(novoRegistro);
         }
 
-        public void Read()
+        public void Visualizar()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine($"{entityName}s Cadastrados");
+            Console.WriteLine($"{nomeEntidade}s Cadastrados");
             Console.WriteLine("---------------------------\n");
 
-            ShowList();
+            MostrarLista();
         }
 
-        public void Update()
+        public void Editar()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine($"Edição de {entityName}");
+            Console.WriteLine($"Edição de {nomeEntidade}");
             Console.WriteLine("---------------------------\n");
 
-            int idToUpdate = GetID();
+            int idParaAtualizar = BuscarID();
             Console.WriteLine();
-            T updatedRegister = Inputs();
-            RepositorioBase.Update(updatedRegister, idToUpdate);
+            T registroAtualizado = Dados();
+            RepositorioBase.Editar(registroAtualizado, idParaAtualizar);
         }
 
-        public void Delete()
+        public void Deletar()
         {
             Console.Clear();
             Console.WriteLine("---------------------------");
-            Console.WriteLine($"Exclusão de {entityName}");
+            Console.WriteLine($"Exclusão de {nomeEntidade}");
             Console.WriteLine("---------------------------\n");
 
-            int idToDelete = GetID();
+            int idParaDeletar = BuscarID();
 
-            RepositorioBase.Delete(idToDelete);
+            RepositorioBase.Excluir(idParaDeletar);
         }
 
-        protected abstract void ShowList();
+        protected abstract void MostrarLista();
 
-        public int GetID()
+        public int BuscarID()
         {
-            int inputID = 0;
-            bool IDExists = false;
+            int id = 0;
+            bool idExiste = false;
 
             do
             {
-                Console.Write($"ID do {entityName.ToLower()}: ");
-                inputID = int.Parse(Console.ReadLine());
-                IDExists = RepositorioBase.IDExists(inputID);
+                Console.Write($"ID do {nomeEntidade.ToLower()}: ");
+                id = int.Parse(Console.ReadLine());
+                idExiste = RepositorioBase.IDExiste(id);
 
-                if (IDExists == false)
+                if (idExiste == false)
                 {
-                    Console.WriteLine($"\nNão foi encontrado um {entityName.ToLower()} com este ID! Pressione ENTER e tente novamente...");
+                    Console.WriteLine($"\nNão foi encontrado um {nomeEntidade.ToLower()} com este ID! Pressione ENTER e tente novamente...");
                     Console.ReadLine();
                 }
             }
-            while (IDExists == false);
+            while (idExiste == false);
 
-            return inputID;
+            return id;
         }
     }
 }

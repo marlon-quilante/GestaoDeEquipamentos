@@ -8,46 +8,46 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
     public class TelaEquipamento : TelaBase<Equipamento>, ITela
     {
         private RepositorioEquipamentoEmArquivo RepositorioEquipamento;
-        public TelaFabricante manufactorView;
+        public TelaFabricante viewFabricante;
         public RepositorioFabricanteEmArquivo RepositorioFabricante;
         public TelaEquipamento(RepositorioEquipamentoEmArquivo RepositorioEquipamento) : base("Equipamento", RepositorioEquipamento)
         {
             this.RepositorioEquipamento = RepositorioEquipamento;
         }
 
-        protected override Equipamento Inputs()
+        protected override Equipamento Dados()
         {
             Console.Write("Nome: ");
-            string name = Console.ReadLine();
+            string nome = Console.ReadLine();
             Console.Write("Preço: ");
-            decimal price = decimal.Parse(Console.ReadLine());
+            decimal preco = decimal.Parse(Console.ReadLine());
             Console.Write("Número de série: ");
-            int serialNumber = int.Parse(Console.ReadLine());
+            int numeroSerie = int.Parse(Console.ReadLine());
 
-            int idManufactor = manufactorView.GetID();
-            Fabricante manufactor = (Fabricante)RepositorioFabricante.GetRegisterByID(idManufactor);
+            int idFabricante = viewFabricante.BuscarID();
+            Fabricante fabricante = RepositorioFabricante.BuscarRegistroPeloID(idFabricante);
 
             Console.Write("Data de fabricação: ");
-            DateTime manufacturingDate = Convert.ToDateTime(Console.ReadLine());
+            DateTime dataFabricacao = Convert.ToDateTime(Console.ReadLine());
 
-            Equipamento product = new Equipamento(name, price, serialNumber, manufactor, manufacturingDate);
+            Equipamento equipamento = new Equipamento(nome, preco, numeroSerie, fabricante, dataFabricacao);
 
-            return product;
+            return equipamento;
         }
 
-        protected override void ShowList()
+        protected override void MostrarLista()
         {
             Console.WriteLine("{0, -5} | {1, -20} | {2, -10} | {3, -20} | {4, -20} | {5, -20}",
                 "ID", "Nome", "Preço", "Número de Série", "Fabricante", "Data de Fabricação");
 
-            List<Equipamento> products = RepositorioEquipamento.GetRegisters();
+            List<Equipamento> equipamentos = RepositorioEquipamento.BuscarRegistros();
 
-            foreach (Equipamento product in products)
+            foreach (Equipamento e in equipamentos)
             {
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -10} |" +
                     " {3, -20} | {4, -20} | {5, -20}",
-                    product.Id, product.Name, product.Price.ToString("F2"), product.SerialNumber,
-                    product.Manufactor.Name, product.ManufactoringDate.ToShortDateString());
+                    e.Id, e.Nome, e.Preco.ToString("F2"), e.NumeroSerie,
+                    e.Fabricante.Nome, e.DataFabricacao.ToShortDateString());
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();

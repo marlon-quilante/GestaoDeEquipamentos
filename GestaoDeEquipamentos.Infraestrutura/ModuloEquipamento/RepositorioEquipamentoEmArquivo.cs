@@ -5,24 +5,24 @@ namespace GestaoDeEquipamentos.Infraestrutura.Arquivos
 {
     public class RepositorioEquipamentoEmArquivo : RepositorioBaseEmArquivo<Equipamento>
     {
-        public RepositorioEquipamentoEmArquivo(ContextoDados context) : base(context) { }
+        public RepositorioEquipamentoEmArquivo(ContextoDados contexto) : base(contexto) { }
 
-        public override List<Equipamento> GetRegisters()
+        public override List<Equipamento> BuscarRegistros()
         {
-            return context.Products;
+            return contexto.Equipamentos;
         }
 
-        public override int GetLastID()
+        public override int BuscarUltimoID()
         {
-            registersList = GetRegisters();
-            int lastId = 0;
+            listaRegistros = BuscarRegistros();
+            int ultimoID = 0;
 
-            foreach (Equipamento product in registersList)
+            foreach (Equipamento e in listaRegistros)
             {
-                lastId = product.Id;
+                ultimoID = e.Id;
             }
 
-            return lastId;
+            return ultimoID;
         }
     }
 }

@@ -8,40 +8,40 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 {
     public class TelaPrincipal
     {
-        private char option;
+        private char opcao;
 
-        private ContextoDados context;
+        private ContextoDados contexto;
 
         private RepositorioFabricanteEmArquivo RepositorioFabricante;
         private RepositorioEquipamentoEmArquivo RepositorioEquipamento;
         private RepositorioChamadoEmArquivo RepositorioChamado;
 
-        private TelaFabricante manufactorView;
-        private TelaEquipamento productView;
-        private TelaChamado ticketView;
+        private TelaFabricante viewFabricante;
+        private TelaEquipamento viewEquipamento;
+        private TelaChamado viewChamado;
 
         public TelaPrincipal()
         {
-            context = new ContextoDados(true);
+            contexto = new ContextoDados(true);
 
-            RepositorioFabricante = new RepositorioFabricanteEmArquivo(context);
-            RepositorioEquipamento = new RepositorioEquipamentoEmArquivo(context);
-            RepositorioChamado = new RepositorioChamadoEmArquivo(context);
+            RepositorioFabricante = new RepositorioFabricanteEmArquivo(contexto);
+            RepositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto);
+            RepositorioChamado = new RepositorioChamadoEmArquivo(contexto);
 
-            manufactorView = new TelaFabricante(RepositorioFabricante);
-            productView = new TelaEquipamento(RepositorioEquipamento);
-            ticketView = new TelaChamado(RepositorioChamado);
+            viewFabricante = new TelaFabricante(RepositorioFabricante);
+            viewEquipamento = new TelaEquipamento(RepositorioEquipamento);
+            viewChamado = new TelaChamado(RepositorioChamado);
 
             RepositorioFabricante.RepositorioEquipamento = RepositorioEquipamento;
 
-            productView.RepositorioFabricante = RepositorioFabricante;
-            productView.manufactorView = manufactorView;
+            viewEquipamento.RepositorioFabricante = RepositorioFabricante;
+            viewEquipamento.viewFabricante = viewFabricante;
 
-            ticketView.productView = productView;
-            ticketView.RepositorioEquipamento = RepositorioEquipamento;
+            viewChamado.viewEquipamento = viewEquipamento;
+            viewChamado.RepositorioEquipamento = RepositorioEquipamento;
         }
 
-        public void MainHeader()
+        public void CabecalhoPrincipal()
         {
             Console.Clear();
             Console.WriteLine("-----------------");
@@ -49,7 +49,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
             Console.WriteLine("-----------------");
         }
 
-        public void MainMenu()
+        public void MenuPrincipal()
         {
             Console.WriteLine("\nSelecione uma opção...\n");
             Console.WriteLine("1- Equipamentos");
@@ -57,17 +57,17 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
             Console.WriteLine("3- Fabricantes");
             Console.WriteLine("4- Sair\n");
 
-            option = Console.ReadLine()[0];
+            opcao = Console.ReadLine()[0];
         }
 
-        public ITela GetView()
+        public ITela ObterTela()
         {
-            if (option == '1')
-                return productView;
-            else if (option == '2')
-                return ticketView;
-            else if (option == '3')
-                return manufactorView;
+            if (opcao == '1')
+                return viewEquipamento;
+            else if (opcao == '2')
+                return viewChamado;
+            else if (opcao == '3')
+                return viewFabricante;
 
             return null;
         }

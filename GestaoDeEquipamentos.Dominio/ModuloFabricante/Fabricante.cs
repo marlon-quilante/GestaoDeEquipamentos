@@ -4,44 +4,44 @@ namespace GestaoDeEquipamentos.Dominio
 {
     public class Fabricante : EntidadeBase<Fabricante>
     {
-        public string Name { get; set; }
+        public string Nome { get; set; }
         public string Email { get; set; }
-        public string Phone { get; set; }
+        public string Telefone { get; set; }
 
         public Fabricante() { }
 
-        public Fabricante(string name, string email, string phone) : this()
+        public Fabricante(string nome, string email, string telefone) : this()
         {
-            this.Name = name;
+            this.Nome = nome;
             this.Email = email;
-            this.Phone = phone;
+            this.Telefone = telefone;
         }
 
-        public override string Validate()
+        public override string Validacao()
         {
-            string errors = "";
+            string erros = "";
 
-            if (string.IsNullOrWhiteSpace(Name))
-                errors += "O nome é obrigatório!\n";
-            else if (Name.Length < 2)
-                errors += "O nome precisa conter mais do que 1 caractere!\n";
+            if (string.IsNullOrWhiteSpace(Nome))
+                erros += "O nome é obrigatório!\n";
+            else if (Nome.Length < 2)
+                erros += "O nome precisa conter mais do que 1 caractere!\n";
 
             if (!MailAddress.TryCreate(Email, out _))
-                errors += "O email deve conter um formato válido: email@email.com\n";
+                erros += "O email deve conter um formato válido: email@email.com\n";
 
-            if (string.IsNullOrWhiteSpace(Phone))
-                errors += "O telefone é obrigatório!\n";
-            else if (Phone.Length < 9)
-                errors += "O telefone deve conter no mínimo 9 caracteres!\n";
+            if (string.IsNullOrWhiteSpace(Telefone))
+                erros += "O telefone é obrigatório!\n";
+            else if (Telefone.Length < 9)
+                erros += "O telefone deve conter no mínimo 9 caracteres!\n";
 
-            return errors;
+            return erros;
         }
 
-        public override void Update(Fabricante updatedManufactor)
+        public override void Editar(Fabricante fabricanteAtualizado)
         {
-            this.Name = updatedManufactor.Name;
-            this.Email = updatedManufactor.Email;
-            this.Phone = updatedManufactor.Phone;
+            this.Nome = fabricanteAtualizado.Nome;
+            this.Email = fabricanteAtualizado.Email;
+            this.Telefone = fabricanteAtualizado.Telefone;
         }
     }
 }

@@ -5,24 +5,24 @@ namespace GestaoDeEquipamentos.Infraestrutura.Arquivos
 {
     public class RepositorioChamadoEmArquivo : RepositorioBaseEmArquivo<Chamado>
     {
-        public RepositorioChamadoEmArquivo(ContextoDados context) : base(context) { }
+        public RepositorioChamadoEmArquivo(ContextoDados contexto) : base(contexto) { }
 
-        public override List<Chamado> GetRegisters()
+        public override List<Chamado> BuscarRegistros()
         {
-            return context.Tickets;
+            return contexto.Chamados;
         }
 
-        public override int GetLastID()
+        public override int BuscarUltimoID()
         {
-            registersList = GetRegisters();
-            int lastId = 0;
+            listaRegistros = BuscarRegistros();
+            int ultimoID = 0;
 
-            foreach (Chamado ticket in registersList)
+            foreach (Chamado c in listaRegistros)
             {
-                lastId = ticket.Id;
+                ultimoID = c.Id;
             }
 
-            return lastId;
+            return ultimoID;
         }
     }
 }

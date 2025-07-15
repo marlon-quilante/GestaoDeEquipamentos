@@ -14,31 +14,31 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             this.RepositorioFabricante = RepositorioFabricante;
         }
 
-        protected override Fabricante Inputs()
+        protected override Fabricante Dados()
         {
             Console.Write("Nome: ");
-            string name = Console.ReadLine();
+            string nome = Console.ReadLine();
             Console.Write("Email: ");
             string email = Console.ReadLine();
             Console.Write("Telefone: ");
-            string phone = Console.ReadLine();
+            string telefone = Console.ReadLine();
 
-            Fabricante manufactor = new Fabricante(name, email, phone);
+            Fabricante fabricante = new Fabricante(nome, email, telefone);
 
-            return manufactor;
+            return fabricante;
         }
 
-        protected override void ShowList()
+        protected override void MostrarLista()
         {
             Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -5}",
                 "ID", "Nome", "Email", "Telefone", "Qtd de Produtos");
 
-            List<Fabricante> manufactors = RepositorioFabricante.GetRegisters();
+            List<Fabricante> fabricantes = RepositorioFabricante.BuscarRegistros();
 
-            foreach (Fabricante manufactor in manufactors)
+            foreach (Fabricante f in fabricantes)
             {
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -5}",
-                    manufactor.Id, manufactor.Name, manufactor.Email, manufactor.Phone, RepositorioFabricante.GetProductsQty(manufactor));
+                    f.Id, f.Nome, f.Email, f.Telefone, RepositorioFabricante.ObterQtdProdutos(f));
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();

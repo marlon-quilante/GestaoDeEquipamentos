@@ -7,19 +7,19 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
 {
     public class FabricanteController : Controller
     {
-        private RepositorioFabricanteEmArquivo repositoryManufactor;
+        private RepositorioFabricanteEmArquivo repositorioFabricante;
 
         public FabricanteController()
         {
-            ContextoDados context = new ContextoDados(true);
-            repositoryManufactor = new RepositorioFabricanteEmArquivo(context);
+            ContextoDados contexto = new ContextoDados(true);
+            repositorioFabricante = new RepositorioFabricanteEmArquivo(contexto);
         }
 
         public IActionResult Index()
         {
-            List<Fabricante> manufactors = repositoryManufactor.GetRegisters();
+            List<Fabricante> fabricantes = repositorioFabricante.BuscarRegistros();
 
-            return View(manufactors);
+            return View(fabricantes);
         }
 
         [HttpGet] //Opcional, pois o framework entende que é GET se deixar sem o atributo
@@ -29,33 +29,33 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(string name, string email, string phone)
+        public IActionResult Cadastrar(string nome, string email, string telefone)
         {
-            Fabricante newManufactor = new Fabricante(name, email, phone);
+            Fabricante novoFabricante = new Fabricante(nome, email, telefone);
 
-            repositoryManufactor.Create(newManufactor);
+            repositorioFabricante.Cadastrar(novoFabricante);
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Editar(int id)
         {
-            Fabricante manufactor = repositoryManufactor.GetRegisterByID(id);
+            Fabricante fabricante = repositorioFabricante.BuscarRegistroPeloID(id);
 
-            if (manufactor == null)
+            if (fabricante == null)
                 return RedirectToAction(nameof(Index));
 
-            return View(manufactor);
+            return View(fabricante);
         }
 
         [HttpPost]
-        public IActionResult Editar(int id, string name, string email, string phone)
+        public IActionResult Editar(int id, string nome, string email, string telefone)
         {
-            Fabricante updatedManufactor = new Fabricante(name, email, phone);
+            Fabricante fabricanteAtualizado = new Fabricante(nome, email, telefone);
 
-            bool successEdit = repositoryManufactor.Update(updatedManufactor, id);
+            bool sucessoEdicao = repositorioFabricante.Editar(fabricanteAtualizado, id);
 
-            if (!successEdit)
+            if (!sucessoEdicao)
                 return RedirectToAction(nameof(Index));
 
             return RedirectToAction(nameof(Index));
@@ -63,18 +63,18 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
 
         public IActionResult Excluir(int id)
         {
-            Fabricante manufactor = repositoryManufactor.GetRegisterByID(id);
+            Fabricante fabricante = repositorioFabricante.BuscarRegistroPeloID(id);
 
-            if (manufactor == null)
+            if (fabricante == null)
                 return RedirectToAction(nameof(Index));
 
-            return View(manufactor);
+            return View(fabricante);
         }
 
         [HttpPost]
         public IActionResult ExcluirConfirmado(int id)
         {
-            repositoryManufactor.Delete(id);
+            repositorioFabricante.Excluir(id);
 
             return RedirectToAction(nameof(Index));
         }

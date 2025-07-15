@@ -4,7 +4,7 @@ public abstract class EntidadeBase<T>
 {
     public int Id { get; set; }
 
-    public abstract string Validate();
+    public abstract string Validacao();
 
-    public abstract void Update(T updatedRegister);
+    public abstract void Editar(T updatedRegister);
 }

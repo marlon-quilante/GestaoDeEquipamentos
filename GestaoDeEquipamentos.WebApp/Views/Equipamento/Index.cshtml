@@ -12,7 +12,7 @@
     @* Bootstrap Icons *@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <title>Fabricantes | Gestão de Equipamentos</title>
+    <title>Equipamentos | Gestão de Equipamentos</title>
 </head>
 
 <body data-bs-theme="dark">
@@ -42,35 +42,12 @@
 
     @* Cabeçalho da página *@
     <header class="container my-2">
-        <h1>Gestão de Fabricantes</h1>
+        <h1>Gestão de Equipamentos</h1>
     </header>
 
     <hr />
     <div class="container my-2">
-        <a class="btn btn-primary mb-2" href="/Fabricante/Cadastrar"><i class="bi bi-plus-circle"></i> Cadastrar</a>
+        <a class="btn btn-primary mb-2" href="/Equipamento/Cadastrar"><i class="bi bi-plus-circle"></i> Cadastrar</a>
     </div>
-
-    @* Conteúdo principal da página *@
-    <main class="container my-2">
-        <div class="row g-2">
-            @foreach (Fabricante f in Model)
-            {
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">@f.Nome</h5>
-                            <p class="card-text mb-0"><strong>Email: </strong>@f.Email</p>
-                            <p class="card-text mb-0"><strong>Telefone: </strong>@f.Telefone</p>
-                        </div>
-
-                        <div class="card-actions ms-auto me-3 mb-3 d-flex gap-1">
-                            <a class="btn btn-sm btn-primary rounded-circle d-flex justify-content-center align-items-center" style="height:30px" href="/Fabricante/Editar/@f.Id"><i class="bi bi-pencil"></i></a>
-                            <a class="btn btn-sm btn-danger rounded-circle d-flex justify-content-center align-items-center" style="height:30px" href="/Fabricante/Excluir/@f.Id"><i class="bi bi-trash"></i></a>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </main>
 </body>
 </html>

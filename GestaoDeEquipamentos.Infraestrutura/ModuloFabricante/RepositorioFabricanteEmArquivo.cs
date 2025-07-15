@@ -7,38 +7,38 @@ namespace GestaoDeEquipamentos.Infraestrutura.Arquivos
     {
         public RepositorioEquipamentoEmArquivo RepositorioEquipamento;
 
-        public RepositorioFabricanteEmArquivo(ContextoDados context) : base(context) { }
+        public RepositorioFabricanteEmArquivo(ContextoDados contexto) : base(contexto) { }
 
-        public override List<Fabricante> GetRegisters()
+        public override List<Fabricante> BuscarRegistros()
         {
-            return context.Manufactors;
+            return contexto.Fabricantes;
         }
 
-        public override int GetLastID()
+        public override int BuscarUltimoID()
         {
-            registersList = GetRegisters();
-            int lastId = 0;
+            listaRegistros = BuscarRegistros();
+            int ultimoID = 0;
 
-            foreach (Fabricante manufactor in registersList)
+            foreach (Fabricante f in listaRegistros)
             {
-                lastId = manufactor.Id;
+                ultimoID = f.Id;
             }
 
-            return lastId;
+            return ultimoID;
         }
 
-        public int GetProductsQty(Fabricante manufactor)
+        public int ObterQtdProdutos(Fabricante fabricante)
         {
-            int number = 0;
+            int quantidade = 0;
 
-            List<Equipamento> products = RepositorioEquipamento.GetRegisters();
+            List<Equipamento> equipamentos = RepositorioEquipamento.BuscarRegistros();
 
-            foreach (Equipamento product in products)
+            foreach (Equipamento e in equipamentos)
             {
-                if (manufactor.Id == product.Manufactor.Id)
-                    number++;
+                if (fabricante.Id == e.Fabricante.Id)
+                    quantidade++;
             }
-            return number;
+            return quantidade;
         }
     }
 }

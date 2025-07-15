@@ -5,82 +5,82 @@ namespace GestaoDeEquipamentos.Infraestrutura.Arquivos
 {
     public abstract class RepositorioBaseEmArquivo<T> where T : EntidadeBase<T>
     {
-        public List<T> registersList = new List<T>();
-        protected ContextoDados context;
+        public List<T> listaRegistros = new List<T>();
+        protected ContextoDados contexto;
 
-        protected RepositorioBaseEmArquivo(ContextoDados context)
+        protected RepositorioBaseEmArquivo(ContextoDados contexto)
         {
-            this.context = context;
-            this.registersList = GetRegisters();
+            this.contexto = contexto;
+            this.listaRegistros = BuscarRegistros();
         }
 
-        public void Create(T newRegister)
+        public void Cadastrar(T novoRegistro)
         {
-            newRegister.Id = GetLastID() + 1;
-            registersList.Add(newRegister);
+            novoRegistro.Id = BuscarUltimoID() + 1;
+            listaRegistros.Add(novoRegistro);
 
-            context.Save();
+            contexto.Salvar();
         }
 
-        public abstract int GetLastID();
+        public abstract int BuscarUltimoID();
 
-        public bool Update(T updatedRegister, int idToUpdate)
+        public bool Editar(T registroAtualizado, int idParaAtualizar)
         {
-            foreach (T register in registersList)
+            foreach (T registro in listaRegistros)
             {
-                if (idToUpdate == register.Id)
+                if (idParaAtualizar == registro.Id)
                 {
-                    register.Update(updatedRegister);
+                    registro.Editar(registroAtualizado);
                     break;
                 }
             }
-            context.Save();
+            contexto.Salvar();
             return true;
         }
 
-        public void Delete(int idToDelete)
+        public void Excluir(int idParaDeletar)
         {
-            foreach (T register in registersList)
+            foreach (T registro in listaRegistros)
             {
-                if (idToDelete == register.Id)
+                if (idParaDeletar == registro.Id)
                 {
-                    registersList.Remove(register);
+                    listaRegistros.Remove(registro);
                     break;
                 }
             }
 
-            context.Save();
+            contexto.Salvar();
         }
 
-        public bool IDExists(int idToValidate)
+        public bool IDExiste(int idParaValidar)
         {
-            bool idExists = false;
+            bool idExiste = false;
 
-            foreach (T register in registersList)
+            foreach (T registro in listaRegistros)
             {
-                if (idToValidate == register.Id)
+                if (idParaValidar == registro.Id)
                 {
-                    idExists = true;
+                    idExiste = true;
                     break;
                 }
                 else
-                    idExists = false;
+                    idExiste = false;
             }
-            return idExists;
+            return idExiste;
         }
 
-        public T GetRegisterByID(int id)
+        public T BuscarRegistroPeloID(int id)
         {
-            foreach (T register in registersList)
+            foreach (T registro in listaRegistros)
             {
-                if (id == register.Id)
+                if (id == registro.Id)
                 {
-                    return register;
+                    return registro;
                 }
             }
             return null;
         }
 
-        public abstract List<T> GetRegisters();
+        public abstract List<T> BuscarRegistros();
     }
 }

@@ -6,39 +6,39 @@ namespace GestaoDeEquipamentos
     {
         static void Main(string[] args)
         {
-            bool systemON = true;
+            bool sistemaON = true;
 
-            TelaPrincipal mainView = new TelaPrincipal();
+            TelaPrincipal telaPrincipal = new TelaPrincipal();
 
-            while (systemON == true)
+            while (sistemaON == true)
             {
-                mainView.MainHeader();
-                mainView.MainMenu();
-                ITela chosenView = mainView.GetView();
+                telaPrincipal.CabecalhoPrincipal();
+                telaPrincipal.MenuPrincipal();
+                ITela telaEscolhida = telaPrincipal.ObterTela();
 
-                if (chosenView == null)
+                if (telaEscolhida == null)
                 {
-                    systemON = false;
+                    sistemaON = false;
                     break;
                 }
                 else
                 {
-                    chosenView.MainHeader();
-                    string option = chosenView.Menu();
+                    telaEscolhida.CabecalhoPrincipal();
+                    string opcao = telaEscolhida.Menu();
 
-                    switch (int.Parse(option))
+                    switch (int.Parse(opcao))
                     {
                         case 1:
-                            chosenView.Create();
+                            telaEscolhida.Cadastrar();
                             break;
                         case 2:
-                            chosenView.Read();
+                            telaEscolhida.Visualizar();
                             break;
                         case 3:
-                            chosenView.Update();
+                            telaEscolhida.Editar();
                             break;
                         case 4:
-                            chosenView.Delete();
+                            telaEscolhida.Deletar();
                             break;
                         default:
                             break;

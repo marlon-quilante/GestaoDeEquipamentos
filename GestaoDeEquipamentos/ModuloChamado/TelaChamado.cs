@@ -9,41 +9,41 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
     {
         private RepositorioChamadoEmArquivo RepositorioChamado;
         public RepositorioEquipamentoEmArquivo RepositorioEquipamento;
-        public TelaEquipamento productView;
+        public TelaEquipamento viewEquipamento;
 
         public TelaChamado(RepositorioChamadoEmArquivo RepositorioChamado) : base("Chamado", RepositorioChamado)
         {
             this.RepositorioChamado = RepositorioChamado;
         }
 
-        protected override Chamado Inputs()
+        protected override Chamado Dados()
         {
             Console.Write("Título: ");
-            string title = Console.ReadLine();
+            string titulo = Console.ReadLine();
             Console.Write("Descrição: ");
-            string description = Console.ReadLine();
+            string descricao = Console.ReadLine();
 
-            int idProduct = productView.GetID();
-            Equipamento product = (Equipamento)RepositorioEquipamento.GetRegisterByID(idProduct);
+            int id = viewEquipamento.BuscarID();
+            Equipamento equipamento = RepositorioEquipamento.BuscarRegistroPeloID(id);
 
-            DateTime openingDate = DateTime.Now;
+            DateTime dataAbertura = DateTime.Now;
 
-            Chamado ticket = new Chamado(title, description, product, openingDate);
+            Chamado chamado = new Chamado(titulo, descricao, equipamento, dataAbertura);
 
-            return ticket;
+            return chamado;
         }
 
-        protected override void ShowList()
+        protected override void MostrarLista()
         {
             Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
                 "ID", "Título", "Descrição", "Equipamento", "Data de Abertura");
 
-            List<Chamado> tickets = RepositorioChamado.GetRegisters();
+            List<Chamado> chamados = RepositorioChamado.BuscarRegistros();
 
-            foreach (Chamado ticket in tickets)
+            foreach (Chamado c in chamados)
             {
                 Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -20} | {4, -20}",
-                    ticket.Id, ticket.Title, ticket.Description, ticket.Product.Name, ticket.OpeningDate.ToShortDateString());
+                    c.Id, c.Titulo, c.Descricao, c.Equipamento.Nome, c.DataAbertura.ToShortDateString());
             }
             Console.WriteLine("\nPressione ENTER para continuar...");
             Console.ReadLine();

@@ -3,10 +3,10 @@
     public interface ITela
     {
         string Menu();
-        void MainHeader();
-        void Create();
-        void Read();
-        void Update();
-        void Delete();
+        void CabecalhoPrincipal();
+        void Cadastrar();
+        void Visualizar();
+        void Editar();
+        void Deletar();
     }
 }

@@ -14,7 +14,9 @@
 <body data-bs-theme="dark">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-            <a class="navbar-brand">Gestão de Equipamentos</a>
+            <a>
+                <img src="@Url.Content("~/Icons/m.png")" style="width: 60px; height: 60px;">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,7 +33,7 @@
         <form class="col-4" action="/Fabricante/Editar/@Model.Id" method="post">
             <div class="mb-3">
                 <label class="form-label">Nome:</label>
-                <input name="Name" type="text" class="form-control" value="@Model.Name">
+                <input name="Nome" type="text" class="form-control" value="@Model.Nome">
             </div>
 
             <div class="mb-3">
@@ -41,7 +43,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Telefone:</label>
-                <input name="Phone" type="tel" class="form-control" value="@Model.Phone">
+                <input name="Telefone" type="tel" class="form-control" value="@Model.Telefone">
             </div>
 
             <div class="d-flex justify-content-end">

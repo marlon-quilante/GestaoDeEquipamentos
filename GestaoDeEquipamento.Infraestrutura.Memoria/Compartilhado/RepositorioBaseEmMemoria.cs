@@ -4,69 +4,69 @@ namespace GestaoDeEquipamentos.Infraestrutura.Memoria
 {
     public abstract class RepositorioBaseEmMemoria<T> where T : EntidadeBase<T>
     {
-        public List<T> registersList = new List<T>();
-        private int idCount = 0;
+        public List<T> listaRegistros = new List<T>();
+        private int contadorID = 0;
 
-        public void CreateController(T newRegister)
+        public void Cadastrar(T novoRegistro)
         {
-            idCount++;
-            newRegister.Id = idCount;
-            registersList.Add(newRegister);
+            contadorID++;
+            novoRegistro.Id = contadorID;
+            listaRegistros.Add(novoRegistro);
         }
 
-        public void UpdateController(T updatedRegister, int idToUpdate)
+        public void Editar(T registroAtualizado, int idParaAtualizar)
         {
-            foreach (T register in registersList)
+            foreach (T registro in listaRegistros)
             {
-                if (idToUpdate == register.Id)
+                if (idParaAtualizar == registro.Id)
                 {
-                    register.Update(updatedRegister);
+                    registro.Editar(registroAtualizado);
                     break;
                 }
             }
         }
 
-        public void DeleteController(int idToDelete)
+        public void Excluir(int idParaDeletar)
         {
-            foreach (T register in registersList)
+            foreach (T registro in listaRegistros)
             {
-                if (idToDelete == register.Id)
+                if (idParaDeletar == registro.Id)
                 {
-                    registersList.Remove(register);
+                    listaRegistros.Remove(registro);
                     break;
                 }
             }
         }
 
-        public bool IDExists(int idToValidate)
+        public bool IDExiste(int idParaValidar)
         {
-            bool idExists = false;
+            bool idExiste = false;
 
-            foreach (T register in registersList)
+            foreach (T registro in listaRegistros)
             {
-                if (idToValidate == register.Id)
+                if (idParaValidar == registro.Id)
                 {
-                    idExists = true;
+                    idExiste = true;
                     break;
                 }
                 else
-                    idExists = false;
+                    idExiste = false;
             }
-            return idExists;
+            return idExiste;
         }
 
-        public List<T> GetRegisters()
+        public List<T> ObterRegistros()
         {
-            return registersList;
+            return listaRegistros;
         }
 
-        public T GetRegisterByID(int id)
+        public T ObterRegistroPeloID(int id)
         {
-            foreach (T register in registersList)
+            foreach (T registro in listaRegistros)
             {
-                if (id == register.Id)
+                if (id == registro.Id)
                 {
-                    return register;
+                    return registro;
                 }
             }
             return null;
