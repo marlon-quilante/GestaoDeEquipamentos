@@ -1,6 +1,7 @@
 ﻿using GestaoDeEquipamentos.Dominio;
 using GestaoDeEquipamentos.Infraestrutura.Arquivos;
 using GestaoDeEquipamentos.Infraestrutura.Arquivos.Compartilhado;
+using GestaoDeEquipamentos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoDeEquipamentos.WebApp.Controllers
@@ -19,19 +20,23 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
         {
             List<Fabricante> fabricantes = repositorioFabricante.BuscarRegistros();
 
-            return View(fabricantes);
+            VisualizarFabricantesViewModel visualizarVM = new VisualizarFabricantesViewModel(fabricantes);
+
+            return View(visualizarVM);
         }
 
         [HttpGet] //Opcional, pois o framework entende que é GET se deixar sem o atributo
         public IActionResult Cadastrar()
         {
-            return View();
+            CadastrarFabricanteViewModel cadastrarVM = new CadastrarFabricanteViewModel();
+
+            return View(cadastrarVM);
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(string nome, string email, string telefone)
+        public IActionResult Cadastrar(CadastrarFabricanteViewModel cadastrarVM)
         {
-            Fabricante novoFabricante = new Fabricante(nome, email, telefone);
+            Fabricante novoFabricante = new Fabricante(cadastrarVM.Nome, cadastrarVM.Email, cadastrarVM.Telefone);
 
             repositorioFabricante.Cadastrar(novoFabricante);
 
@@ -45,13 +50,19 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
             if (fabricante == null)
                 return RedirectToAction(nameof(Index));
 
-            return View(fabricante);
+            EditarFabricanteViewModel editarVM = new EditarFabricanteViewModel(
+                fabricante.Id,
+                fabricante.Nome,
+                fabricante.Email,
+                fabricante.Telefone);
+
+            return View(editarVM);
         }
 
         [HttpPost]
-        public IActionResult Editar(int id, string nome, string email, string telefone)
+        public IActionResult Editar(int id, EditarFabricanteViewModel editarVM)
         {
-            Fabricante fabricanteAtualizado = new Fabricante(nome, email, telefone);
+            Fabricante fabricanteAtualizado = new Fabricante(editarVM.Nome, editarVM.Email, editarVM.Telefone);
 
             bool sucessoEdicao = repositorioFabricante.Editar(fabricanteAtualizado, id);
 
@@ -68,7 +79,9 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
             if (fabricante == null)
                 return RedirectToAction(nameof(Index));
 
-            return View(fabricante);
+            ExcluirFabricanteViewModel excluirVM = new ExcluirFabricanteViewModel(id, fabricante.Nome);
+
+            return View(excluirVM);
         }
 
         [HttpPost]

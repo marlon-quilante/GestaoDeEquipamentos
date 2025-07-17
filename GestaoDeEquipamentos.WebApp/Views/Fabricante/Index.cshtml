@@ -1,59 +1,23 @@
 ﻿@using GestaoDeEquipamentos.Dominio
-@model List<Fabricante>
+@using GestaoDeEquipamentos.WebApp.Models
 
-@* CSS = Cascading Style Sheets*@
+@model VisualizarFabricantesViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Fabricantes";
+}
 
 <html>
-<head>
-    @* Bootstrap *@
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-
-    @* Bootstrap Icons *@
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-    <title>Fabricantes | Gestão de Equipamentos</title>
-</head>
-
 <body data-bs-theme="dark">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a href="/Home">
-                <img src="@Url.Content("~/Icons/m.png")" style="width: 60px; height: 60px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item me-2">
-                        <a class="btn btn-outline-info" style="height: 50px; align-content:center" href="/Fabricante">Fabricantes</a>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="btn btn-outline-info" style="height: 50px; align-content:center" href="/Equipamento">Equipamentos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-info" style="height: 50px; align-content:center" href="/Chamado">Chamados</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    @* Cabeçalho da página *@
-    <header class="container my-2">
-        <h1>Gestão de Fabricantes</h1>
-    </header>
-
-    <hr />
-    <div class="container my-2">
-        <a class="btn btn-primary mb-2" href="/Fabricante/Cadastrar"><i class="bi bi-plus-circle"></i> Cadastrar</a>
+    <div>
+        <a class="btn btn-primary mb-3" href="/Fabricante/Cadastrar"><i class="bi bi-plus-circle"></i> Cadastrar</a>
     </div>
 
     @* Conteúdo principal da página *@
-    <main class="container my-2">
+    <main>
         <div class="row g-2">
-            @foreach (Fabricante f in Model)
+            @foreach (DetalhesFabricanteViewModel f in Model.Registros)
             {
                 <div class="col-4">
                     <div class="card">

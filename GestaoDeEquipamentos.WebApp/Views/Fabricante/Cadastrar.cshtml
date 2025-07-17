@@ -1,46 +1,26 @@
-﻿<html>
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastro de Fabricante";
+}
 
-<head>
-    @* Bootstrap *@
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-
-    <title>Cadastro de Fabricante | Gestão de Equipamentos</title>
-</head>
+<html>
 
 <body data-bs-theme="dark">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a>
-                <img src="@Url.Content("~/Icons/m.png")" style="width: 60px; height: 60px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
-
-    <header class="container my-2">
-        <h1>Cadastro de Fabricante</h1>
-    </header>
-
-    <hr />
-
     <main class="container my-4">
         <form class="col-4" action="/Fabricante/Cadastrar" method="post">
             <div class="mb-3">
                 <label class="form-label">Nome:</label>
-                <input name="Nome" type="text" class="form-control" placeholder="Digite o nome do fabricante...">
+                <input name="Nome" type="text" class="form-control" value="@Model.Nome" placeholder="Digite o nome do fabricante...">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Email:</label>
-                <input name="Email" type="email" class="form-control" placeholder="Digite o email do fabricante...">
+                <input name="Email" type="email" class="form-control" value="@Model.Email" placeholder="Digite o email do fabricante...">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Telefone:</label>
-                <input name="Telefone" type="tel" class="form-control" placeholder="Digite o telefone do fabricante...">
+                <input name="Telefone" type="tel" class="form-control" value="@Model.Telefone" placeholder="Digite o telefone do fabricante...">
             </div>
 
             <div class="d-flex justify-content-end">
