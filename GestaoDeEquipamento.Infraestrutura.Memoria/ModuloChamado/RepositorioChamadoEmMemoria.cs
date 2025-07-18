@@ -2,5 +2,5 @@
 
 namespace GestaoDeEquipamentos.Infraestrutura.Memoria
 {
-    public class RepositorioChamadoEmMemoria : RepositorioBaseEmMemoria<Chamado>;
+    public class RepositorioChamadoEmMemoria : RepositorioBaseEmMemoria<Equipamento>;
 }

@@ -6,5 +6,5 @@ public abstract class EntidadeBase<T>
 
     public abstract string Validacao();
 
-    public abstract void Editar(T updatedRegister);
+    public abstract void Editar(T registroAtualizado);
 }

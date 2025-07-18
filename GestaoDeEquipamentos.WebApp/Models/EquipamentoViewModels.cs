@@ -1,5 +1,4 @@
 ﻿using GestaoDeEquipamentos.Dominio;
-using GestaoDeEquipamentos.WebApp.Controllers;
 
 namespace GestaoDeEquipamentos.WebApp.Models
 {
@@ -51,6 +50,18 @@ namespace GestaoDeEquipamentos.WebApp.Models
         }
     }
 
+    public class SelecionarFabricanteViewModel
+    {
+        public int Id { get; set; }
+        public string Nome { get; set; }
+
+        public SelecionarFabricanteViewModel(int id, string nome)
+        {
+            Id = id;
+            Nome = nome;
+        }
+    }
+
     public class CadastrarEquipamentoViewModel
     {
         public string Nome { get; set; }
@@ -76,12 +87,45 @@ namespace GestaoDeEquipamentos.WebApp.Models
         }
     }
 
-    public class SelecionarFabricanteViewModel
+    public class EditarEquipamentoViewModel
+    {
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public decimal Preco { get; set; }
+        public int NumeroSerie { get; set; }
+        public int FabricanteID { get; set; }
+        public DateTime DataFabricacao { get; set; }
+        public List<SelecionarFabricanteViewModel> Fabricantes { get; set; }
+
+        public EditarEquipamentoViewModel()
+        {
+            Fabricantes = new List<SelecionarFabricanteViewModel>();
+        }
+
+        public EditarEquipamentoViewModel(int id, string nome, decimal preco, int numeroSerie, int fabricanteID, DateTime dataFabricacao, List<Fabricante> listaFabricantes) : this()
+        {
+            Id = id;
+            Nome = nome;
+            Preco = preco;
+            NumeroSerie = numeroSerie;
+            FabricanteID = fabricanteID;
+            DataFabricacao = dataFabricacao;
+
+            foreach (Fabricante f in listaFabricantes)
+            {
+                SelecionarFabricanteViewModel selecionarFabricanteVM = new SelecionarFabricanteViewModel(f.Id, f.Nome);
+
+                Fabricantes.Add(selecionarFabricanteVM);
+            }
+        }
+    }
+    
+    public class ExcluirEquipamentoViewModel()
     {
         public int Id { get; set; }
         public string Nome { get; set; }
 
-        public SelecionarFabricanteViewModel(int id, string nome)
+        public ExcluirEquipamentoViewModel(int id, string nome) : this()
         {
             Id = id;
             Nome = nome;

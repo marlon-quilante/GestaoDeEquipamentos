@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\GestaoDeEquipamentos.WebApp\Views\_ViewImports.cshtml" Link="_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GestaoDeEquipamento.Infraestrutura.Memoria\GestaoDeEquipamentos.Infraestrutura.Memoria.csproj" />
     <ProjectReference Include="..\GestaoDeEquipamentos.Dominio\GestaoDeEquipamentos.Dominio.csproj" />
     <ProjectReference Include="..\GestaoDeEquipamentos.Infraestrutura\GestaoDeEquipamentos.Infraestrutura.Arquivos.csproj" />
