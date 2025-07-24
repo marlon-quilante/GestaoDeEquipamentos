@@ -8,12 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GestaoDeEquipamentos.Dominio\GestaoDeEquipamentos.Dominio.csproj" />
-    <ProjectReference Include="..\GestaoDeEquipamentos.Infraestrutura\GestaoDeEquipamentos.Infraestrutura.Arquivos.csproj" />
+    <None Include="wwwroot\Icons\product-durability.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Icons\product-durability.png" />
+    <ProjectReference Include="..\GestaoDeEquipamentos.Infraestrutura.Arquivos\GestaoDeEquipamentos.Infraestrutura.Arquivos.csproj" />
   </ItemGroup>
 
 </Project>
