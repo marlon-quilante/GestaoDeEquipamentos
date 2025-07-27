@@ -49,7 +49,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Arquivos.Compartilhado
 
             string conteudoJson = File.ReadAllText(caminhoCompleto);
 
-            if (string.IsNullOrWhiteSpace(caminhoCompleto))
+            if (string.IsNullOrWhiteSpace(conteudoJson))
                 return;
 
             JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
